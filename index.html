@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Apex Transport Group</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            /* ===== APEX TRANSPORT GROUP — BRAND COLORS ===== */
+            --color-primary: #f47920;
+            /* Apex Orange — CTAs, highlights, accents */
+            --color-primary-dim: #e65c00;
+            /* Darker orange — hover states */
+            --color-primary-glow: rgba(244, 121, 32, 0.1);
+            /* Orange glow / overlays */
+
+            --color-secondary: #1e3fa0;
+            /* Apex Blue — headings, logo, nav */
+            --color-secondary-dim: #1e40af;
+            /* Lighter blue — hover on blue elements */
+            --color-secondary-glow: rgba(30, 63, 160, 0.08);
+
+            /* ===== GRADIENTS ===== */
+            --gradient-primary: linear-gradient(135deg, #f47920 0%, #f9a826 100%);
+            --gradient-secondary: linear-gradient(135deg, #1e3fa0 0%, #3b82f6 100%);
+            --gradient-hero: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f5f5f7 100%);
+            --gradient-surface: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+
+            /* ===== BACKGROUNDS ===== */
+            --color-bg: #f5f5f7;
+            /* Warm off-white page background */
+            --color-surface: #ffffff;
+            /* Pure white cards/sections */
+            --color-surface-2: #f8f9fa;
+            /* Very light gray elevated surfaces */
+            --color-border: #e5e7eb;
+            /* Subtle light borders */
+
+            /* ===== TEXT ===== */
+            --color-text: #111111;
+            /* Near black primary text */
+            --color-text-muted: #4b5563;
+            /* Medium gray secondary text */
+            --color-text-subtle: #9ca3af;
+            /* Light gray disabled/decorative text */
+            --color-accent: #f47920;
+            /* Orange — highlights, emphasis */
+
+            /* ===== TRANSITION ===== */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* ===== SHADOWS ===== */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NOISE TEXTURE OVERLAY ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.15;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-logo-mark {
+            width: 120px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            flex-shrink: 0;
+        }
+
+        .nav-logo-mark img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-text);
+        }
+
+        .nav-logo-text span {
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: #000 !important;
+            padding: 10px 24px;
+            font-weight: 700 !important;
+            transition: all var(--transition) !important;
+        }
+
+        .nav-cta:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            cursor: pointer;
+            padding: 8px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-hero);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, var(--color-bg) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 48px 120px 80px;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .hero-eyebrow-line {
+            width: 40px;
+            height: 2px;
+            background: var(--color-primary);
+        }
+
+        .hero-eyebrow-text {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(44px, 7vw, 84px);
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--color-primary);
+            display: block;
+        }
+
+        .hero-sub {
+            font-size: 17px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            max-width: 440px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 18px 32px;
+            transition: all var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero-image img,
+        .how-image-wrap img,
+        .coverage-image-wrap img,
+        .fleet-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--color-bg) 0%, transparent 30%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-stats {
+            position: absolute;
+            bottom: 48px;
+            left: 80px;
+            z-index: 3;
+            display: flex;
+            gap: 56px;
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            padding: 32px 48px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 40px;
+            line-height: 1;
+            color: var(--color-secondary);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-top: 8px;
+        }
+
+        /* ===== TICKER ===== */
+        .ticker {
+            background: var(--gradient-primary);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-inner {
+            display: inline-flex;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 24px;
+            padding: 0 32px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .ticker-dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section {
+            padding: 100px 80px;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-label-line {
+            width: 32px;
+            height: 2px;
+            background: var(--color-primary);
+        }
+
+        .section-label-text {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(36px, 6vw, 56px);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 24px;
+        }
+
+        .section-body {
+            font-size: 17px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            max-width: 540px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            background: #ffffff;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .services-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 72px;
+            align-items: end;
+        }
+
+        .services-intro {
+            font-size: 17px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--color-border);
+        }
+
+        .service-card {
+            background: #ffffff;
+            padding: 48px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform var(--transition);
+            transform-origin: left;
+        }
+
+        .service-card:hover {
+            background: #f8f9fa;
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            color: var(--color-primary);
+            transition: all var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            border-color: var(--color-primary);
+            background: rgba(244, 121, 32, 0.05);
+        }
+
+        .service-num {
+            position: absolute;
+            top: 32px;
+            right: 32px;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 56px;
+            color: var(--color-border);
+            line-height: 1;
+            opacity: 0.5;
+            user-select: none;
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 16px;
+        }
+
+        .service-desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how {
+            background: var(--color-bg);
+        }
+
+        .how-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .how-image-wrap {
+            position: relative;
+            aspect-ratio: 4/3;
+        }
+
+        .how-badge {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: var(--gradient-primary);
+            color: #000;
+            padding: 24px 32px;
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .how-badge-num {
+            font-size: 48px;
+            line-height: 1;
+            display: block;
+        }
+
+        .how-badge-label {
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .step:first-child {
+            border-top: 1px solid var(--color-border);
+        }
+
+        .step-num {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 14px;
+            color: var(--color-primary);
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+            padding-top: 2px;
+            width: 32px;
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+        }
+
+        .step-desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== COVERAGE ===== */
+        .coverage {
+            background: #ffffff;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .coverage-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .countries {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--color-border);
+            margin-top: 48px;
+        }
+
+        .country-card {
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .country-flag {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .country-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+
+        .country-note {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        .coverage-image-wrap {
+            position: relative;
+            aspect-ratio: 4/3;
+        }
+
+        /* ===== VALUES ===== */
+        .values {
+            background: var(--color-bg);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--color-border);
+            margin-top: 64px;
+        }
+
+        .value-card {
+            background: #ffffff;
+            padding: 40px 32px;
+            border-bottom: 3px solid transparent;
+            transition: all var(--transition);
+        }
+
+        .value-card:hover {
+            background: #f8f9fa;
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .value-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .value-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 12px;
+            letter-spacing: 0.03em;
+        }
+
+        .value-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== FLEET / GALLERY ===== */
+        .fleet {
+            background: #ffffff;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 320px 320px;
+            gap: 1px;
+            background: var(--color-border);
+            margin-top: 56px;
+        }
+
+        .fleet-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .fleet-item {
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .fleet-item:first-child {
+            grid-row: 1 / 3;
+        }
+
+        .fleet-item-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 24px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .fleet-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== TECH BANNER ===== */
+        .tech-banner {
+            background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 100%);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            padding: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .tech-heading {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 24px;
+        }
+
+        .tech-heading span {
+            color: var(--color-primary);
+        }
+
+        .tech-body {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .tech-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            padding: 12px 20px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        .tech-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: var(--color-bg);
+        }
+
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 48px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-primary);
+        }
+
+        .contact-label {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 6px;
+        }
+
+        .contact-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .contact-value:hover {
+            color: var(--color-primary);
+        }
+
+        .contact-form {
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            padding: 56px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: var(--color-text);
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 10px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 16px;
+            /* 16px crucial for mobile iOS auto-zoom prevention */
+            padding: 18px 20px;
+            outline: none;
+            transition: border-color var(--transition);
+            appearance: none;
+            border-radius: 0;
+        }
+
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234b5563' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: var(--color-primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--gradient-primary);
+            color: #000;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            padding: 20px;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all var(--transition);
+        }
+
+        .btn-submit:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #f8f9fa;
+            border-top: 1px solid var(--color-border);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+            padding: 80px 80px 32px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr 1fr 1fr;
+            gap: 64px;
+            padding-bottom: 64px;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 32px;
+        }
+
+        .footer-brand p {
+            font-size: 15px;
+            color: var(--color-text-muted);
+            margin-top: 24px;
+            max-width: 320px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 15px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy {
+            font-size: 14px;
+            color: var(--color-text-subtle);
+        }
+
+        .footer-copy span {
+            color: var(--color-primary);
+        }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 200;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 24px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+       MOBILE FIRST OPTIMIZATIONS (MEDIA QUERIES)
+       ========================================= */
+
+        @media (max-width: 1024px) {
+
+            /* Mobile Navigation Overlay */
+            nav {
+                padding: 0 24px;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 100px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--color-surface);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 24px;
+                gap: 0;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links li {
+                width: 100%;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav-links li:last-child {
+                border: none;
+                margin-top: 24px;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 20px 0;
+                font-size: 18px;
+                color: var(--color-text);
+            }
+
+            .nav-cta {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 16px !important;
+            }
+
+            /* Grid Collapses */
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            /* Hide hero image or rely on background */
+
+            section {
+                padding: 80px 32px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .how-grid,
+            .coverage-inner,
+            .contact-inner,
+            .tech-banner {
+                grid-template-columns: 1fr;
+                gap: 56px;
+            }
+
+            .how-image-wrap,
+            .coverage-image-wrap {
+                display: none;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .fleet-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .fleet-item:first-child {
+                grid-row: auto;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 48px;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            /* Refined Mobile Spacing */
+            section {
+                padding: 64px 20px;
+            }
+
+            /* Mobile App-Like Metrics */
+            .hero-stats {
+                position: static;
+                background: var(--color-surface-2);
+                padding: 32px 20px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+                text-align: center;
+                border-top: 1px solid var(--color-border);
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .stat-number {
+                font-size: 28px;
+                line-height: 1;
+                white-space: nowrap;
+            }
+
+            .stat-label {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+            }
+
+            /* Mobile Hero Typography Adjustments */
+            .hero-content {
+                padding: 40px 20px 24px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+                letter-spacing: -0.01em;
+                line-height: 1.05;
+            }
+
+            .hero-sub {
+                font-size: 15px;
+                line-height: 1.65;
+            }
+
+            /* Mobile Services Typography */
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 32px 20px;
+            }
+
+            .service-num {
+                font-size: 40px;
+                right: 20px;
+                top: 24px;
+            }
+
+            .service-title {
+                font-size: 20px;
+                letter-spacing: 0.02em;
+            }
+
+            .service-desc {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            /* Mobile Values & Section Typography */
+            .section-title {
+                font-size: 32px;
+                letter-spacing: -0.01em;
+                line-height: 1.1;
+            }
+
+            /* Mobile Fleet Typography */
+            .fleet-grid {
+                grid-template-columns: 1fr;
+                gap: 1px;
+                margin-top: 40px;
+            }
+
+            .fleet-item {
+                height: 220px;
+            }
+
+            .fleet-item-label {
+                font-size: 12px;
+                letter-spacing: 0.1em;
+                padding: 16px 20px;
+            }
+
+            /* Mobile Contact Typography */
+            .contact-form {
+                padding: 32px 20px;
+            }
+
+            .form-title {
+                font-size: 28px;
+                margin-bottom: 24px;
+                letter-spacing: 0.01em;
+            }
+
+            /* Mobile Footer Typography */
+            footer {
+                padding: 48px 20px 24px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                margin-bottom: 24px;
+            }
+
+            .footer-brand p {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .footer-copy {
+                font-size: 13px;
+            }
+
+            /* Tech Banner Mobile Typography */
+            .tech-banner {
+                padding: 56px 20px;
+                gap: 40px;
+            }
+
+            .tech-heading {
+                font-size: 32px;
+                line-height: 1.1;
+            }
+
+            .tech-body {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .tech-pill {
+                font-size: 13px;
+                letter-spacing: 0.06em;
+            }
+
+            /* Mobile step titles and descriptions */
+            .step-title {
+                font-size: 18px;
+                letter-spacing: 0.02em;
+            }
+
+            .step-desc {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-mark"><img src="logo.png" alt="Apex Transport"></div>
+        </a>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobileToggle">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#coverage">Coverage</a></li>
+            <li><a href="#fleet">Fleet</a></li>
+            <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="hero-eyebrow-line"></div>
+                <span class="hero-eyebrow-text">Cross-Border Freight Specialists</span>
+            </div>
+            <h1>
+                Move Cargo.
+                <span class="highlight">Cross Borders.</span>
+                No Excuses.
+            </h1>
+            <p class="hero-sub">
+                Apex Transport Group manages end-to-end freight logistics across Southern and Central Africa — from
+                finding the right truck to clearing customs at the border.
+            </p>
+            <div class="hero-actions">
+                <a href="https://wa.me/27729377143" class="btn-primary">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                    </svg>
+                    WhatsApp Us
+                </a>
+                <a href="#services" class="btn-secondary">
+                    Our Services
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="webp/img_5.webp" alt="Freight truck crossing border">
+        </div>
+
+        <!-- App-like Mobile Stats (Absolute on Desktop, Grid on Mobile) -->
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">4+</span>
+                <span class="stat-label">Countries</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Monitoring</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">48H</span>
+                <span class="stat-label">Clearance</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker-inner">
+            <span class="ticker-item">South Africa <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Zimbabwe <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Zambia <span class="ticker-dot"></span></span>
+            <span class="ticker-item">DRC <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Border Docs <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Customs Clearance <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Route Planning <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Real-Time Tracking <span class="ticker-dot"></span></span>
+            <span class="ticker-item">South Africa <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Zimbabwe <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Zambia <span class="ticker-dot"></span></span>
+            <span class="ticker-item">DRC <span class="ticker-dot"></span></span>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="services-header">
+            <div>
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">What We Do</span>
+                </div>
+                <h2 class="section-title">Full-Chain<br>Freight Services</h2>
+            </div>
+            <p class="services-intro">
+                We don't just find you a truck — we own the entire process. From the moment your cargo is ready to the
+                moment it arrives, Apex is on the ground, in the system, and on the phone.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card fade-up">
+                <span class="service-num">01</span>
+                <div class="service-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path d="M9 11l3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+                    </svg>
+                </div>
+                <div class="service-title">Border Documentation</div>
+                <p class="service-desc">Fast, accurate preparation of all cross-border paperwork. We know the
+                    requirements for SA, Zimbabwe, Zambia, and DRC — no delays at the gate.</p>
+            </div>
+
+            <div class="service-card fade-up">
+                <span class="service-num">02</span>
+                <div class="service-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                </div>
+                <div class="service-title">Customs Clearance</div>
+                <p class="service-desc">We navigate customs processes with precision. Our team handles declarations,
+                    duties, and compliance so your load never sits at a border unnecessarily.</p>
+            </div>
+
+            <div class="service-card fade-up">
+                <span class="service-num">03</span>
+                <div class="service-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 8v4l3 3" />
+                    </svg>
+                </div>
+                <div class="service-title">Route Planning</div>
+                <p class="service-desc">Strategic routing that balances speed, cost, and compliance. We factor in road
+                    conditions, border wait times, and cargo requirements before a wheel turns.</p>
+            </div>
+
+            <div class="service-card fade-up">
+                <span class="service-num">04</span>
+                <div class="service-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                        <path d="M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                </div>
+                <div class="service-title">Transporter Network</div>
+                <p class="service-desc">Your cargo, matched to the right truck. We maintain a strong network of verified
+                    transporters across the region, so we always have capacity when you need it.</p>
+            </div>
+
+            <div class="service-card fade-up">
+                <span class="service-num">05</span>
+                <div class="service-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z" />
+                        <path d="M8 2v16M16 6v16" />
+                    </svg>
+                </div>
+                <div class="service-title">Real-Time Monitoring</div>
+                <p class="service-desc">Hands-on oversight from pickup to delivery. We track every shipment in real-time
+                    and proactively handle exceptions before they become problems.</p>
+            </div>
+
+            <div class="service-card fade-up">
+                <span class="service-num">06</span>
+                <div class="service-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.58-.58a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92" />
+                    </svg>
+                </div>
+                <div class="service-title">Direct Communication</div>
+                <p class="service-desc">Call or WhatsApp us any time. We are South Africa-based and fully reachable —
+                    not an automated system, real people who know your load.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+        <div class="how-grid">
+            <div class="how-image-wrap">
+                <img src="webp/img_2.webp" alt="Logistics operations">
+                <div class="how-badge">
+                    <span class="how-badge-num">100%</span>
+                    <span class="how-badge-label">Load Coverage</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">The Process</span>
+                </div>
+                <h2 class="section-title">How Apex<br>Works</h2>
+                <p class="section-body">Simple for you. Handled by us. Every step of the cross-border journey is managed
+                    end-to-end.</p>
+
+                <div class="steps fade-up">
+                    <div class="step">
+                        <span class="step-num">01</span>
+                        <div class="step-content">
+                            <div class="step-title">You Have Cargo</div>
+                            <p class="step-desc">Tell us what needs to move, where it's coming from, and where it's
+                                going. We handle the rest.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">02</span>
+                        <div class="step-content">
+                            <div class="step-title">We Find the Truck</div>
+                            <p class="step-desc">We match your load to a verified transporter from our network — the
+                                right vehicle, right capacity, right route.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">03</span>
+                        <div class="step-content">
+                            <div class="step-title">Docs & Border Prep</div>
+                            <p class="step-desc">All border documentation and customs processes are prepared and
+                                submitted before the truck even arrives at the gate.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">04</span>
+                        <div class="step-content">
+                            <div class="step-title">We Monitor Every KM</div>
+                            <p class="step-desc">Real-time involvement from our team throughout the journey. You get
+                                updates. We manage exceptions instantly.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">05</span>
+                        <div class="step-content">
+                            <div class="step-title">Safe Delivery</div>
+                            <p class="step-desc">Your cargo arrives at destination, on time, with full documentation. No
+                                excuses — every load must move.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COVERAGE -->
+    <section class="coverage" id="coverage">
+        <div class="coverage-inner">
+            <div>
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">Where We Operate</span>
+                </div>
+                <h2 class="section-title">Covering<br>the Region</h2>
+                <p class="section-body">Apex specializes in moving cargo across Southern and Central Africa — navigating
+                    complex border environments with local knowledge and deep compliance expertise.</p>
+
+                <div class="countries fade-up">
+                    <div class="country-card">
+                        <span class="country-flag">🇿🇦</span>
+                        <div class="country-name">South Africa</div>
+                        <div class="country-note">HQ & Primary Hub</div>
+                    </div>
+                    <div class="country-card">
+                        <span class="country-flag">🇿🇼</span>
+                        <div class="country-name">Zimbabwe</div>
+                        <div class="country-note">Active corridors</div>
+                    </div>
+                    <div class="country-card">
+                        <span class="country-flag">🇿🇲</span>
+                        <div class="country-name">Zambia</div>
+                        <div class="country-note">Active corridors</div>
+                    </div>
+                    <div class="country-card">
+                        <span class="country-flag">🇨🇩</span>
+                        <div class="country-name">DRC</div>
+                        <div class="country-note">Specialist routing</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coverage-image-wrap fade-up">
+                <img src="webp/img_3.webp" alt="Route map coverage area">
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values" id="values">
+        <div class="section-label">
+            <div class="section-label-line"></div>
+            <span class="section-label-text">Our Principles</span>
+        </div>
+        <h2 class="section-title">Built on<br>Reliability</h2>
+
+        <div class="values-grid">
+            <div class="value-card fade-up">
+                <span class="value-icon">🎯</span>
+                <div class="value-title">Reliability First</div>
+                <p class="value-desc">Every load must move — no excuses. We do not cancel, we do not delay without
+                    communication. Your cargo commitment is our commitment.</p>
+            </div>
+            <div class="value-card fade-up">
+                <span class="value-icon">🤝</span>
+                <div class="value-title">Hands-On Operations</div>
+                <p class="value-desc">We are actively involved in every shipment. Real people, real-time involvement —
+                    not a platform that passes you to a stranger.</p>
+            </div>
+            <div class="value-card fade-up">
+                <span class="value-icon">🌍</span>
+                <div class="value-title">Strong Network</div>
+                <p class="value-desc">Years of building relationships with trusted transporters across the region means
+                    we always have the right connection for your load.</p>
+            </div>
+            <div class="value-card fade-up">
+                <span class="value-icon">⚡</span>
+                <div class="value-title">Speed & Tech</div>
+                <p class="value-desc">Digital documentation, rapid processing, and tech-enabled tracking mean your
+                    freight moves faster with less friction at every stage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLEET GALLERY -->
+    <section class="fleet" id="fleet">
+        <div class="section-label">
+            <div class="section-label-line"></div>
+            <span class="section-label-text">Our Fleet</span>
+        </div>
+        <h2 class="section-title">Built for<br>African Roads</h2>
+
+        <div class="fleet-grid fade-up">
+            <div class="fleet-item">
+                <img src="webp/img_4.webp" alt="Heavy freight vehicles">
+                <div class="fleet-item-label">Heavy Freight Vehicles</div>
+            </div>
+            <div class="fleet-item">
+                <img src="webp/img_5.webp" alt="Cross-border ready truck">
+                <div class="fleet-item-label">Cross-Border Ready</div>
+            </div>
+            <div class="fleet-item">
+                <img src="webp/cross.webp" alt="Long-haul truck">
+                <div class="fleet-item-label">Long-Haul Specialists</div>
+            </div>
+            <div class="fleet-item">
+                <img src="webp/bulk.webp" alt="Bulk cargo truck">
+                <div class="fleet-item-label">Bulk Cargo</div>
+            </div>
+            <div class="fleet-item">
+                <img src="webp/varified_partners.webp" alt="Verified transport partner">
+                <div class="fleet-item-label">Verified Partners</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH BANNER -->
+    <div class="tech-banner">
+        <div>
+            <h3 class="tech-heading">Documentation.<br><span>Done Fast.</span></h3>
+            <p class="tech-body">
+                Cross-border freight lives and dies on paperwork. Apex uses digital workflows to prepare, submit, and
+                verify all documentation before your truck reaches the border — cutting clearance time dramatically and
+                eliminating common delay points.
+            </p>
+        </div>
+        <div class="tech-pills fade-up">
+            <div class="tech-pill"><span class="tech-pill-dot"></span>Digital Doc Prep</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>Customs Pre-Clearance</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>Real-Time Tracking</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>WhatsApp Updates</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>Compliance Verified</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>24/7 Monitoring</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>Live Route Adjustments</div>
+            <div class="tech-pill"><span class="tech-pill-dot"></span>Fast Turnaround</div>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <div>
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">Get In Touch</span>
+                </div>
+                <h2 class="section-title">Ready to<br>Move?</h2>
+                <p class="section-body">
+                    Call or WhatsApp us directly — we're based in South Africa and respond fast. No forms needed if
+                    you'd rather talk.
+                </p>
+
+                <div class="contact-details">
+                    <!-- PHONE LINK NOW OPENS WHATSAPP AS REQUESTED -->
+                    <div class="contact-item fade-up">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-label">Call / WhatsApp</div>
+                            <a href="https://wa.me/27729377143" class="contact-value">072 937 7143</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item fade-up">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-label">Based In</div>
+                            <span class="contact-value" style="cursor:default">South Africa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form fade-up">
+                <div class="form-title">Request a Quote</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input class="form-input" type="text" placeholder="Full name" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company</label>
+                        <input class="form-input" type="text" placeholder="Company name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone / WhatsApp</label>
+                    <input class="form-input" type="tel" placeholder="+27 ..." />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Origin Country</label>
+                    <select class="form-select form-input">
+                        <option value="">Select country</option>
+                        <option>South Africa</option>
+                        <option>Zimbabwe</option>
+                        <option>Zambia</option>
+                        <option>DRC</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Destination Country</label>
+                    <select class="form-select form-input">
+                        <option value="">Select country</option>
+                        <option>South Africa</option>
+                        <option>Zimbabwe</option>
+                        <option>Zambia</option>
+                        <option>DRC</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cargo Details</label>
+                    <textarea class="form-textarea"
+                        placeholder="Describe your cargo — type, weight, dimensions..."></textarea>
+                </div>
+                <button class="btn-submit">Send Quote Request</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="display:inline-flex">
+                    <div class="nav-logo-mark"><img src="logo.png" alt="Apex Transport"></div>
+                </a>
+                <p>Cross-border freight specialists across Southern and Central Africa. Every load must move — no
+                    excuses.</p>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Services</div>
+                <ul class="footer-links">
+                    <li><a href="#services">Border Documentation</a></li>
+                    <li><a href="#services">Customs Clearance</a></li>
+                    <li><a href="#services">Route Planning</a></li>
+                    <li><a href="#services">Transporter Network</a></li>
+                    <li><a href="#services">Load Monitoring</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Coverage</div>
+                <ul class="footer-links">
+                    <li><a href="#coverage">South Africa</a></li>
+                    <li><a href="#coverage">Zimbabwe</a></li>
+                    <li><a href="#coverage">Zambia</a></li>
+                    <li><a href="#coverage">DRC</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/27729377143">072 937 7143</a></li>
+                    <li><a href="https://wa.me/27729377143">WhatsApp Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2026 <span>Apex Transport Group</span> — All Rights Reserved</div>
+            <div class="footer-copy">South Africa · Zimbabwe · Zambia · DRC</div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/27729377143" class="whatsapp-float" aria-label="Chat on WhatsApp"
+        title="WhatsApp Apex Transport">
+        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <script>
+        // Fade-up on scroll
+        const fadeEls = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeEls.forEach(el => observer.observe(el));
+
+        // Smooth nav highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinksList = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 100) current = s.id;
+            });
+            navLinksList.forEach(a => {
+                a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--color-primary)' : '';
+            });
+        });
+
+        // Mobile Menu Logic
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinksContainer = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinksContainer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksContainer.classList.remove('active');
+            });
+        });
+
+        // Hide navbar on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const nav = document.querySelector('nav');
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+
+</html>
