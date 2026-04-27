@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Apex Transport Group</title>
     <link rel="icon" type="image/x-icon" href="logo_ico.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap"
         rel="stylesheet" />
@@ -58,6 +59,11 @@
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
             --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+            /* ===== FONTS ===== */
+            --font-body: 'Barlow', sans-serif;
+            --font-display: 'Barlow Condensed', sans-serif;
+            --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
         }
 
         *,
@@ -209,7 +215,12 @@
             cursor: pointer;
             padding: 8px;
             position: relative;
-            z-index: 1001;
+            z-index: 1002;
+            transition: color var(--transition);
+        }
+
+        .mobile-toggle:hover {
+            color: var(--color-primary);
         }
 
         /* ===== HERO ===== */
@@ -685,48 +696,189 @@
 
         .coverage-inner {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
+            grid-template-columns: 1fr;
+            gap: 56px;
+            align-items: start;
         }
 
-        .countries {
+        /* Map styles are defined below under COVERAGE MAP comment */
+
+        /* ===== COVERAGE MAP GRID ===== */
+        .countries-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: var(--color-border);
-            margin-top: 48px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
         }
 
-        .country-card {
+        .map-container {
+            position: relative;
+            width: 100%;
+            margin: 0 auto 48px;
+            padding: 48px;
+        }
+
+        .country-item {
             background: #ffffff;
-            padding: 32px;
+            padding: 40px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        .country-item:hover,
+        .country-item:focus {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+        .country-item:active {
+            transform: scale(0.97);
+        }
+
+        .country-item.hub {
+            border-top: 4px solid var(--color-primary);
+        }
+
+        .country-item.active {
+            border-top: 4px solid var(--color-secondary);
+        }
+
+        .country-item.specialist {
+            border-top: 4px solid #eab308;
         }
 
         .country-flag {
-            font-size: 32px;
-            margin-bottom: 12px;
             display: block;
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 16px;
+            font-family: var(--font-emoji);
         }
 
         .country-name {
+            display: block;
             font-family: var(--font-display);
             font-weight: 700;
             font-size: 20px;
             text-transform: uppercase;
             color: var(--color-text);
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .country-status {
+            display: block;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        /* Country popup */
+        .country-popup {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px);
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid var(--color-border);
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .country-popup.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .popup-flag {
+            display: block;
+            font-size: 32px;
+            margin-bottom: 6px;
+            font-family: var(--font-emoji);
+        }
+
+        .popup-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--color-text);
             margin-bottom: 4px;
         }
 
-        .country-note {
-            font-size: 13px;
-            color: var(--color-text-muted);
-            font-weight: 300;
+        .popup-status {
+            font-size: 20px;
+            line-height: 1;
         }
 
-        .coverage-image-wrap {
-            position: relative;
-            aspect-ratio: 4/3;
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        .status-emoji {
+            font-size: 20px;
+            line-height: 1;
+            font-family: var(--font-emoji);
+        }
+
+        /* Stats row */
+        .coverage-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--color-border);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .coverage-stats .stat {
+            background: #ffffff;
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        .coverage-stats .stat-number {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 36px;
+            color: var(--color-secondary);
+            display: block;
+            line-height: 1;
+        }
+
+        .coverage-stats .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-top: 8px;
+            display: block;
         }
 
         /* ===== VALUES ===== */
@@ -1158,34 +1310,35 @@
 
         @media (max-width: 1024px) {
 
-            /* Mobile Navigation Overlay */
-            nav {
-                padding: 0 24px;
-            }
+        /* Mobile Navigation Overlay */
+        nav {
+            padding: 0 24px;
+        }
 
-            .mobile-toggle {
-                display: block;
-            }
+        .mobile-toggle {
+            display: block;
+        }
 
             .nav-links {
                 position: fixed;
-                top: 100px;
+                top: 0;
                 left: 0;
-                right: 0;
-                bottom: 0;
+                width: 100%;
+                height: 100vh;
                 background: var(--color-surface);
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 24px;
+                padding: 100px 24px 24px;
                 gap: 0;
                 transform: translateX(100%);
                 transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 overflow-y: auto;
+                z-index: 1001;
             }
 
-            .nav-links.active {
-                transform: translateX(0);
-            }
+        .nav-links.active {
+            transform: translateX(0);
+        }
 
             .nav-links li {
                 width: 100%;
@@ -1254,6 +1407,16 @@
 
             .fleet-item:first-child {
                 grid-row: auto;
+            }
+
+            /* Mobile Coverage Map */
+            .map-container {
+                max-width: 100%;
+                aspect-ratio: 1 / 1;
+            }
+
+            .coverage-stats {
+                max-width: 100%;
             }
 
             .footer-top {
@@ -1426,6 +1589,63 @@
                 font-size: 14px;
                 line-height: 1.6;
             }
+
+            /* Mobile Coverage Map Grid - 2 columns */
+            .map-container {
+                padding: 24px;
+            }
+
+            .countries-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .country-item {
+                padding: 32px 16px;
+            }
+
+            .country-flag {
+                font-size: 40px;
+                margin-bottom: 12px;
+            }
+
+            .country-name {
+                font-size: 16px;
+            }
+
+            .country-status {
+                font-size: 20px;
+            }
+
+            .map-legend {
+                gap: 20px;
+            }
+
+            .legend-item {
+                font-size: 12px;
+            }
+
+            .status-emoji {
+                font-size: 18px;
+            }
+
+            .coverage-stats .stat {
+                padding: 24px 12px;
+            }
+
+            .coverage-stats .stat-number {
+                font-size: 28px;
+            }
+
+            .coverage-stats .stat-label {
+                font-size: 9px;
+                letter-spacing: 0.12em;
+            }
+
+            /* Mobile Coverage Header spacing */
+            .coverage-header .section-title {
+                margin-bottom: 0;
+            }
         }
     </style>
 </head>
@@ -1439,7 +1659,7 @@
         </a>
 
         <!-- Mobile Hamburger Menu Button -->
-        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobileToggle">
+        <button class="mobile-toggle" aria-label="Open Menu" aria-expanded="false" aria-controls="navLinks" id="mobileToggle">
             <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -1494,7 +1714,7 @@
         <!-- App-like Mobile Stats (Absolute on Desktop, Grid on Mobile) -->
         <div class="hero-stats">
             <div class="stat">
-                <span class="stat-number">4+</span>
+                <span class="stat-number">8</span>
                 <span class="stat-label">Countries</span>
             </div>
             <div class="stat">
@@ -1515,6 +1735,10 @@
             <span class="ticker-item">Zimbabwe <span class="ticker-dot"></span></span>
             <span class="ticker-item">Zambia <span class="ticker-dot"></span></span>
             <span class="ticker-item">DRC <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Botswana <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Malawi <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Tanzania <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Mozambique <span class="ticker-dot"></span></span>
             <span class="ticker-item">Border Docs <span class="ticker-dot"></span></span>
             <span class="ticker-item">Customs Clearance <span class="ticker-dot"></span></span>
             <span class="ticker-item">Route Planning <span class="ticker-dot"></span></span>
@@ -1523,6 +1747,10 @@
             <span class="ticker-item">Zimbabwe <span class="ticker-dot"></span></span>
             <span class="ticker-item">Zambia <span class="ticker-dot"></span></span>
             <span class="ticker-item">DRC <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Botswana <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Malawi <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Tanzania <span class="ticker-dot"></span></span>
+            <span class="ticker-item">Mozambique <span class="ticker-dot"></span></span>
         </div>
     </div>
 
@@ -1554,7 +1782,7 @@
                 </div>
                 <div class="service-title">Border Documentation</div>
                 <p class="service-desc">Fast, accurate preparation of all cross-border paperwork. We know the
-                    requirements for SA, Zimbabwe, Zambia, and DRC — no delays at the gate.</p>
+                    requirements for all 8 Southern & Central African countries — no delays at the gate.</p>
             </div>
 
             <div class="service-card fade-up">
@@ -1702,41 +1930,88 @@
     <!-- COVERAGE -->
     <section class="coverage" id="coverage">
         <div class="coverage-inner">
-            <div>
+            <div class="coverage-header fade-up">
                 <div class="section-label">
                     <div class="section-label-line"></div>
                     <span class="section-label-text">Where We Operate</span>
                 </div>
-                <h2 class="section-title">Covering<br>the Region</h2>
-                <p class="section-body">Apex specializes in moving cargo across Southern and Central Africa — navigating
-                    complex border environments with local knowledge and deep compliance expertise.</p>
-
-                <div class="countries fade-up">
-                    <div class="country-card">
-                        <span class="country-flag">🇿🇦</span>
-                        <div class="country-name">South Africa</div>
-                        <div class="country-note">HQ & Primary Hub</div>
-                    </div>
-                    <div class="country-card">
-                        <span class="country-flag">🇿🇼</span>
-                        <div class="country-name">Zimbabwe</div>
-                        <div class="country-note">Active corridors</div>
-                    </div>
-                    <div class="country-card">
-                        <span class="country-flag">🇿🇲</span>
-                        <div class="country-name">Zambia</div>
-                        <div class="country-note">Active corridors</div>
-                    </div>
-                    <div class="country-card">
-                        <span class="country-flag">🇨🇩</span>
-                        <div class="country-name">DRC</div>
-                        <div class="country-note">Specialist routing</div>
-                    </div>
-                </div>
+                <h2 class="section-title">Africa<br>Coverage</h2>
             </div>
 
-            <div class="coverage-image-wrap fade-up">
-                <img src="webp/img_3.webp" alt="Route map coverage area">
+            <!-- Interactive Map - Country Cards Grid -->
+            <div class="map-container fade-up">
+                <div class="countries-grid" role="list" aria-label="Coverage map showing 8 African countries">
+                    <div class="country-item hub" role="listitem" tabindex="0" data-country="za">
+                        <span class="fi fi-za"></span> 
+                        <span class="country-name">South Africa</span>
+                        
+                    </div>
+                    <div class="country-item active" role="listitem" tabindex="0" data-country="zw">
+                        <span class="fi fi-zw"></span>
+                        <span class="country-name">Zimbabwe</span>
+                        
+                    </div>
+                    <div class="country-item active" role="listitem" tabindex="0" data-country="zm">
+                        <span class="fi fi-zm"></span>
+                        <span class="country-name">Zambia</span>
+                        
+                    </div>
+                    <div class="country-item specialist" role="listitem" tabindex="0" data-country="cd">
+                        <span class="fi fi-cd"></span>
+                        <span class="country-name">DRC</span>
+                        
+                    </div>
+                    <div class="country-item active" role="listitem" tabindex="0" data-country="bw">
+                        <span class="fi fi-bw"></span>
+                        <span class="country-name">Botswana</span>
+                        
+                    </div>
+                    <div class="country-item active" role="listitem" tabindex="0" data-country="mw">
+                        <span class="fi fi-mw"></span>
+                        <span class="country-name">Malawi</span>
+                        
+                    </div>
+                    <div class="country-item active" role="listitem" tabindex="0" data-country="tz">
+                        <span class="fi fi-tz"></span>
+                        <span class="country-name">Tanzania</span>
+                        
+                    </div>
+                    <div class="country-item active" role="listitem" tabindex="0" data-country="mz">
+                        <span class="fi fi-mz"></span>
+                        <span class="country-name">Mozambique</span>
+                        
+                    </div>
+                </div>
+
+                <!-- Country Popup -->
+                <div class="country-popup" id="countryPopup">
+                    <span class="popup-flag"></span>
+                    <div class="popup-name"></div>
+                    <div class="popup-status"></div>
+                </div>
+
+                <!-- Legend -->
+                <div class="map-legend">
+                    <span class="legend-item"><span class="status-emoji">🏠</span> Hub</span>
+                    <span class="legend-item"><span class="status-emoji">🛣️</span> Active</span>
+                    <span class="legend-item"><span class="status-emoji">⚠️</span> Specialist</span>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="coverage-stats">
+                    <div class="stat">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Routes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">48h</span>
+                        <span class="stat-label">Clearance</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1901,6 +2176,10 @@
                         <option>Zimbabwe</option>
                         <option>Zambia</option>
                         <option>DRC</option>
+                        <option>Botswana</option>
+                        <option>Malawi</option>
+                        <option>Tanzania</option>
+                        <option>Mozambique</option>
                         <option>Other</option>
                     </select>
                 </div>
@@ -1912,6 +2191,10 @@
                         <option>Zimbabwe</option>
                         <option>Zambia</option>
                         <option>DRC</option>
+                        <option>Botswana</option>
+                        <option>Malawi</option>
+                        <option>Tanzania</option>
+                        <option>Mozambique</option>
                         <option>Other</option>
                     </select>
                 </div>
@@ -1954,6 +2237,10 @@
                     <li><a href="#coverage">Zimbabwe</a></li>
                     <li><a href="#coverage">Zambia</a></li>
                     <li><a href="#coverage">DRC</a></li>
+                    <li><a href="#coverage">Botswana</a></li>
+                    <li><a href="#coverage">Malawi</a></li>
+                    <li><a href="#coverage">Tanzania</a></li>
+                    <li><a href="#coverage">Mozambique</a></li>
                 </ul>
             </div>
 
@@ -1968,21 +2255,19 @@
 
         <div class="footer-bottom">
             <div class="footer-copy">© 2026 <span>Apex Transport Group</span> — All Rights Reserved</div>
-            <div class="footer-copy">South Africa · Zimbabwe · Zambia · DRC</div>
+            <div class="footer-copy">South Africa · Zimbabwe · Zambia · DRC · Botswana · Malawi · Tanzania · Mozambique</div>
         </div>
     </footer>
 
     <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/27729377143" class="whatsapp-float" aria-label="Chat on WhatsApp"
-        title="WhatsApp Apex Transport">
+    <a href="https://wa.me/27729377143" class="whatsapp-float" aria-label="Chat on WhatsApp" title="WhatsApp Apex Transport">
         <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
     </a>
 
     <script>
-        // Fade-up on scroll
+        // ===== FADE-UP ON SCROLL =====
         const fadeEls = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
@@ -1992,37 +2277,24 @@
                 }
             });
         }, { threshold: 0.1 });
-        fadeEls.forEach(el => observer.observe(el));
+        for (let i = 0; i < fadeEls.length; i++) {
+            observer.observe(fadeEls[i]);
+        }
 
-        // Smooth nav highlight
+        // ===== SMOOTH NAV HIGHLIGHT =====
         const sections = document.querySelectorAll('section[id]');
         const navLinksList = document.querySelectorAll('.nav-links a');
         window.addEventListener('scroll', () => {
             let current = '';
-            sections.forEach(s => {
-                if (window.scrollY >= s.offsetTop - 100) current = s.id;
-            });
-            navLinksList.forEach(a => {
-                a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--color-primary)' : '';
-            });
+            for (let i = 0; i < sections.length; i++) {
+                if (window.pageYOffset >= sections[i].offsetTop - 100) current = sections[i].id;
+            }
+            for (let i = 0; i < navLinksList.length; i++) {
+                navLinksList[i].style.color = navLinksList[i].getAttribute('href') === `#${current}` ? 'var(--color-primary)' : '';
+            }
         });
 
-        // Mobile Menu Logic
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navLinksContainer = document.getElementById('navLinks');
-
-        mobileToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking a link
-        navLinksContainer.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinksContainer.classList.remove('active');
-            });
-        });
-
-        // Hide navbar on scroll
+        // ===== HIDE NAVBAR ON SCROLL =====
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -2035,7 +2307,136 @@
             }
             lastScroll = currentScroll;
         });
+
+        // ===== MOBILE NAVIGATION TOGGLE =====
+        (function() {
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navLinks = document.getElementById('navLinks');
+            const body = document.body;
+
+            const iconHamburger = `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>`;
+            const iconClose = `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>`;
+
+            if (!mobileToggle || !navLinks) return;
+
+            function openMenu() {
+                navLinks.classList.add('active');
+                mobileToggle.innerHTML = iconClose;
+                mobileToggle.setAttribute('aria-label', 'Close Menu');
+                mobileToggle.setAttribute('aria-expanded', 'true');
+                body.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                navLinks.classList.remove('active');
+                mobileToggle.innerHTML = iconHamburger;
+                mobileToggle.setAttribute('aria-label', 'Open Menu');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                body.style.overflow = '';
+            }
+
+            mobileToggle.addEventListener('click', function() {
+                navLinks.classList.contains('active') ? closeMenu() : openMenu();
+            });
+
+            const navLinksAnchors = navLinks.querySelectorAll('a');
+            for (let i = 0; i < navLinksAnchors.length; i++) {
+                navLinksAnchors[i].addEventListener('click', closeMenu);
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+
+            mobileToggle.setAttribute('aria-label', 'Open Menu');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        })();
+
+        // ===== AFRICA COVERAGE MAP INTERACTIVITY =====
+        (function() {
+            const countriesData = {
+                za: { name: "South Africa", flag: "🇿🇦", status: "🏠", note: "HQ & Primary Hub" },
+                zw: { name: "Zimbabwe", flag: "🇿🇼", status: "🛣️", note: "Active corridors" },
+                zm: { name: "Zambia", flag: "🇿🇲", status: "🛣️", note: "Active corridors" },
+                cd: { name: "DRC", flag: "🇨🇩", status: "⚠️", note: "Specialist routing" },
+                bw: { name: "Botswana", flag: "🇧🇼", status: "🛣️", note: "Active corridors" },
+                mw: { name: "Malawi", flag: "🇲🇼", status: "🛣️", note: "Active corridors" },
+                tz: { name: "Tanzania", flag: "🇹🇿", status: "🛣️", note: "Active corridors" },
+                mz: { name: "Mozambique", flag: "🇲🇿", status: "🛣️", note: "Active corridors" }
+            };
+
+            const popup = document.getElementById('countryPopup');
+            const popupFlag = popup.querySelector('.popup-flag');
+            const popupName = popup.querySelector('.popup-name');
+            const popupStatus = popup.querySelector('.popup-status');
+            const mapContainer = document.querySelector('.map-container');
+
+            // Country card interaction
+            const countryCards = document.querySelectorAll('.country-item');
+            for (let i = 0; i < countryCards.length; i++) {
+                const card = countryCards[i];
+                const code = card.getAttribute('data-country');
+                const data = countriesData[code];
+                if (!data) continue;
+
+                const showPopup = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    popupFlag.textContent = data.flag;
+                    popupName.textContent = data.name;
+                    popupStatus.textContent = data.status;
+
+                    popup.classList.add('visible');
+
+                    // Positioning
+                    const rect = card.getBoundingClientRect();
+                    const containerRect = mapContainer.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2 - containerRect.left;
+
+                    const isMobile = window.innerWidth <= 640;
+                    if (isMobile) {
+                        popup.style.top = 'auto';
+                        popup.style.bottom = '10px';
+                    } else {
+                        const topY = rect.top - containerRect.top;
+                        const popupHeight = popup.offsetHeight || 80;
+                        let topPos = topY - popupHeight - 12;
+                        if (topPos < 10) topPos = topY + 12;
+                        popup.style.top = `${topPos}px`;
+                        popup.style.bottom = 'auto';
+                    }
+
+                    popup.style.left = `${centerX}px`;
+                    popup.style.transform = 'translateX(-50%)';
+                };
+
+                const hidePopup = () => {
+                    popup.classList.remove('visible');
+                };
+
+                card.addEventListener('click', showPopup);
+                card.addEventListener('focus', showPopup);
+                card.addEventListener('blur', hidePopup);
+            }
+
+            // Close popup when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.country-item') && !e.target.closest('.country-popup')) {
+                    popup.classList.remove('visible');
+                }
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') popup.classList.remove('visible');
+            });
+
+            // Close on resize
+            window.addEventListener('resize', () => popup.classList.remove('visible'));
+        })();
     </script>
 </body>
-
 </html>
