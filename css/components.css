@@ -1141,16 +1141,22 @@
 /* ── Section heading pattern (eyebrow + heading) ───────────── */
 .container--narrow {
   display: flex;
-  justify-content: center;
-  /* Horizontal centering */
-  align-items: center;
-  /* Vertical centering */
-  height: 100vh;
-
+  justify-content: start;
+  align-items: flex-start;
 }
 
 .section-header {
-  margin-bottom: var(--space-12);
+  padding: var(--space-12) var(--container-pad) var(--space-8);
+ margin: 0;
+}
+
+@media (max-width: 640px) {
+  .services-track {
+    margin-bottom: var(--space-4);
+    .section-header {
+    margin: 0%;
+    }
+  }
 }
 
 .section-header__eyebrow {

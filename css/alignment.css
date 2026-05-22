@@ -17,8 +17,8 @@
   box-sizing: border-box;
 }
 
-/* ── Section headers (<header class=section-header>) — align eyebrow, h2, subcopy ─ */
-.section-header,
+/* ── Section headers (<header class=section-header>) — left-aligned ─ */
+
 #contact-cta .section-header,
 #values .section-header,
 #fleet-preview .section-header,
@@ -27,7 +27,7 @@
 .coverage-journey__header {
   width: 100%;
   max-width: var(--container-max);
-  margin-inline: auto;
+  margin-inline: 0;
   padding-inline: var(--container-pad);
   box-sizing: border-box;
 }

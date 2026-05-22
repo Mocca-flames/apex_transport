@@ -120,7 +120,7 @@ button {
 .container--narrow {
   width: 100%;
   max-width: var(--container-narrow);
-  margin-inline: auto;
+
   padding-inline: var(--container-pad);
 }
 

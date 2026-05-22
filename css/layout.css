@@ -20,7 +20,6 @@
 .container--narrow {
   width: 100%;
   max-width: var(--container-narrow);
-  margin-inline: auto;
   padding-inline: var(--container-pad);
 }
 
@@ -284,7 +283,7 @@
   }
 
   .trust-bar__item {
-    padding: var(--space-4) var(--space-2);
+    padding: var(--space-2) var(--space-1);
     border-right: none;
     border-bottom: none;
   }
