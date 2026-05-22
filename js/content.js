@@ -668,14 +668,11 @@
   // before the nav fetch resolves. Guard with a flag to avoid
   // calling buildAll() redundantly on subsequent nav:injected fires
   // (the event is also dispatched after footer injection).
+  var _contentLoaded = false;
   var _navInjectedDone = false;
   document.addEventListener('nav:injected', function _retryBuild() {
-    if (_navInjectedDone) return;
     _navInjectedDone = true;
-    // Only run if content is already loaded; otherwise wait for fetchContent
-    if (apexContent) {
-      buildAll();
-    }
+    if (_contentLoaded) buildAll();
   });
 
   // Start loading content immediately
@@ -685,11 +682,13 @@
       dataKeys: data ? Object.keys(data).join(', ') : 'none',
       apexContentNow: !!apexContent
     });
+    _contentLoaded = true;
     if (data) {
       buildAll();
     } else {
       console.warn('[Apex Content] No content data loaded; dynamic content will be missing');
     }
+    if (_navInjectedDone) buildAll();
   });
   window.apexContentReady = contentPromise;
 
