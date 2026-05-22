@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Enter your load reference to see current location, border status, and ETA. Updating every hour.">
+  <title>Track Your Load – Real-Time Border Updates</title>
+  <style>.coverage-sticky{pointer-events:none!important}.coverage-sticky.is-visible{pointer-events:auto!important}</style>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/components.css?v=3">
+  <link rel="icon" href="/favicon-96x96.png" sizes="96x96">
+</head>
+<body>
+
+  <div id="site-nav">
+    <nav class="nav" role="banner"><div class="nav__container"><span>Loading…</span></div></nav>
+  </div>
+
+  <div class="nav__mobile-footer" id="mobileFooter" aria-hidden="true">
+    <div class="nav__mobile-row">
+      <span>WhatsApp: <a href="https://wa.me/27729377143" class="nav__mobile-cta">072 937 7143</a></span>
+      <span>Based: South Africa</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Tracking Input Hero -->
+    <section class="hero section--dark" id="track-hero">
+      <div class="hero__media">
+        <img src="/webp/cross.webp" alt="Tracking dashboard on tablet" class="hero__img" data-parallax="0.2">
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content container">
+        <span class="hero__eyebrow">Track Your Load</span>
+        <h1 class="hero__title">Where is your load right now?</h1>
+        <p class="hero__subtitle">Enter your load reference number below.</p>
+
+        <div class="hero__actions" style="max-width: 520px;">
+          <label for="trackingRef" class="text-sm" style="color: rgba(255,255,255,0.8); margin-bottom: var(--space-2); display:block;">Load Reference</label>
+          <div style="display:flex; gap: var(--space-3);">
+            <input type="text" id="trackingRef" placeholder="e.g. APX-2026-004821"
+                   style="flex:1; padding: var(--space-3) var(--space-4); border-radius: 6px; border: 1.5px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.3); color: white; font-size: var(--text-base); outline: none; transition: border-color 0.2s;">
+            <button type="button" id="trackBtn" class="btn btn-primary">Track â†’</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tracking Result States -->
+    <section class="section section--light">
+      <div class="container" style="max-width: 800px;">
+        <div id="trackingResult" style="display: none;">
+          <!-- In Transit state -->
+          <article id="state-transit" class="glass-card" style="display:none; border-left: 4px solid var(--apex-success);">
+            <h3 style="color: var(--apex-success); font-family:'Barlow Condensed'; font-weight:700; font-size: var(--text-2xl); text-transform: uppercase; margin-bottom: var(--space-4);">IN TRANSIT</h3>
+            <p style="margin-bottom: var(--space-2);"><strong>Last update:</strong> <span id="transit-update">Beit Bridge Border Post â€” 14:23 SAST</span></p>
+            <p style="margin-bottom: var(--space-4);"><strong>ETA:</strong> <span id="transit-eta">Lusaka, Zambia â€” Est. 09 May 2026</span></p>
+            <p style="color: var(--apex-muted); font-size: var(--text-sm);"><strong>Progress:</strong> <span id="transit-stops">JHB â†’ Beit Bridge â†’ Harare â†’ Chirundu â†’ Lusaka</span></p>
+          </article>
+
+          <!-- At Border state -->
+          <article id="state-border" class="glass-card" style="display:none; border-left: 4px solid var(--apex-warning);">
+            <h3 style="color: var(--apex-warning); font-family:'Barlow Condensed'; font-weight:700; font-size: var(--text-2xl); text-transform: uppercase; margin-bottom: var(--space-4);">AT BORDER â€” CLEARANCE IN PROGRESS</h3>
+            <p style="margin-bottom: var(--space-2);"><strong>Last update:</strong> <span id="border-update">Kasumbalesa â€” Agent on site</span></p>
+            <p style="color: var(--apex-muted); font-size: var(--text-sm);"><span id="border-note">Estimated clearance: 4â€“6 hours. You will be notified on completion.</span></p>
+          </article>
+
+          <!-- Delivered state -->
+          <article id="state-delivered" class="glass-card" style="display:none; border-left: 4px solid var(--apex-success);">
+            <h3 style="color: var(--apex-success); font-family:'Barlow Condensed'; font-weight:700; font-size: var(--text-2xl); text-transform: uppercase; margin-bottom: var(--space-4);">DELIVERED âœ“</h3>
+            <p style="margin-bottom: var(--space-2);"><strong>Delivered to:</strong> <span id="delivered-to">[Consignee name]</span></p>
+            <p style="margin-bottom: var(--space-4);"><strong>Delivered at:</strong> <span id="delivered-at">[Date & time]</span></p>
+            <a href="#" id="pod-link" class="btn btn-navy" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Download Proof of Delivery â†’</a>
+          </article>
+
+          <!-- Not Found state -->
+          <article id="state-notfound" class="glass-card" style="display:none; border-left: 4px solid var(--apex-error);">
+            <h3 style="color: var(--apex-error); font-family:'Barlow Condensed'; font-weight:700; font-size: var(--text-2xl); text-transform: uppercase; margin-bottom: var(--space-4);">LOAD NOT FOUND</h3>
+            <p style="margin-bottom: var(--space-6);">Doubleâ€‘check the reference on your booking confirmation, or contact our dispatch team directly.</p>
+            <a href="https://wa.me/27729377143" class="btn btn-primary">Contact Dispatch â†’ WhatsApp 072 937 7143</a>
+          </article>
+
+          <!-- Error fallback -->
+          <article id="state-error" class="glass-card" style="display:none; border-left: 4px solid var(--apex-error);">
+            <h3 style="color: var(--apex-error); font-family:'Barlow Condensed'; font-weight:700; font-size: var(--text-2xl); text-transform: uppercase; margin-bottom: var(--space-4);">UNABLE TO RETRIEVE</h3>
+            <p>Network or system error. Please try again later or contact us directly.</p>
+          </article>
+        </div>
+
+        <noscript>
+          <p style="text-align:center; color: var(--apex-muted); margin-top: var(--space-8);">
+            JavaScript is required to look up tracking information. Please enable JavaScript or <a href="https://wa.me/27729377143">contact us on WhatsApp</a>.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer" style="display:none;"><footer class="footer"><div class="container"><span>Loading…</span></div></footer></div>
+
+
+  <script src="/js/content.js" defer></script>
+  <script src="/js/shared-nav.js" defer></script>
+  <script src="/js/tier.js" defer></script>
+  <script src="/js/scroll.js" defer></script>
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/reveal.js" defer></script>
+  <script src="/js/form.js" defer></script>
+  <script src="/js/tracking.js" defer></script>
+  <script src="/js/main.js" defer></script>
+  <script src="/js/parallax.js" defer></script>
+</body>
+</html>

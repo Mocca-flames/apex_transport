@@ -1,0 +1,215 @@
+/* Apex Transport Group — Base Styles
+   Import order: tokens.css → base.css → components.css → animations.css
+*/
+
+/* ── Font Import ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+
+/* ── Box Sizing & Reset ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Root defaults ──────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  overflow-x: hidden;       /* Kill side-scroll at the document root */
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+body {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 1.625;
+  color: var(--apex-charcoal);
+  background-color: var(--apex-off-white);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;           /* Prevent side-scroll from any overflowing child */
+}
+
+
+/* ── Typography ─────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--apex-navy);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(var(--text-4xl), 10vw, var(--text-8xl)); text-transform: uppercase; letter-spacing: -0.03em; }
+h2 { font-size: clamp(var(--text-3xl), 5vw, var(--text-6xl)); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+p {
+  margin-bottom: var(--space-4);
+}
+
+small, .text-sm {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.text-xs {
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+a {
+  color: var(--apex-orange);
+  text-decoration: none;
+  transition: color var(--dur-base) var(--ease-out);
+}
+a:hover {
+  color: var(--apex-orange-hot);
+}
+
+/* ── Lists ─────────────────────────────────────────────────── */
+ul, ol {
+  list-style: none;
+}
+
+/* ── Images ────────────────────────────────────────────────── */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Forms ─────────────────────────────────────────────────── */
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ── Utilities ─────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.container--wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+}
+
+.container--narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* Section spacing */
+.section {
+  padding-block: var(--section-pad-md);
+}
+.section--lg { padding-block: var(--section-pad-lg); }
+.section--sm { padding-block: var(--section-pad-sm); }
+
+/* Dark section variant */
+.section--dark {
+  background-color: var(--apex-navy);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Mid-tone dark variant */
+.section--mid {
+  background-color: var(--apex-navy-mid);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Light section (default body bg is off-white) */
+.section--light {
+  background-color: var(--apex-off-white);
+}
+
+/* Grain texture overlay on dark sections */
+.section--dark::after,
+.section--mid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px;
+  background-repeat: repeat;
+}
+
+/* Ensure content sits above grain */
+.section--dark > *,
+.section--mid > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Reveal base (scroll trigger) ─────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-up { opacity: 0; transform: translateY(40px); }
+.reveal-left { opacity: 0; transform: translateX(-40px); }
+.reveal-right { opacity: 0; transform: translateX(40px); }
+
+/* Stagger children — inline --stagger-index for delay */
+.reveal[style*='--stagger-index'] {
+  transition-delay: calc(var(--stagger-index, 0) * var(--dur-stagger-unit));
+}
+
+/* Parallax elements — GPU acceleration */
+[data-parallax] {
+  will-change: transform;
+  /* Hint to browser: this element will be transformed via JS */
+}
+
+/* Reduced motion override */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .reveal-up, .reveal-left, .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  [data-parallax] {
+    will-change: auto;
+    transform: none !important;
+  }
+}

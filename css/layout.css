@@ -1,0 +1,286 @@
+/* Apex Transport Group — Layout Utilities
+   Grid patterns: feature split, services grid, staggered, commodity masonry
+*/
+
+/* ── Container wrappers ─────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.container--wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.container--narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* ── Feature split — image dominant 62/38 (DESIGN.md §7.6) ─── */
+.layout-feature {
+  display: grid;
+  grid-template-columns: 62fr 38fr;
+  gap: 0;
+  align-items: center;
+  min-height: 600px;
+}
+
+@media (max-width: 1024px) {
+
+
+  .layout-feature .feature-split__media {
+    display: none;
+  }
+
+  .layout-feature {
+    margin: 0;
+    padding: 0;
+    grid-template-columns: 1fr;
+    flex-wrap: inherit;
+  }
+
+  .feature-split__content {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+  }
+}
+
+.layout-feature--reverse {
+  grid-template-columns: 38fr 62fr;
+}
+
+/* Feature split media container — fills grid cell, clips parallax overflow */
+.feature-split__media {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  /* stretch to match grid row height */
+  background: var(--apex-navy);
+  /* Fallback bg while image loads */
+}
+
+/* Feature split image — parallax ready, cover-fill container */
+.feature-split__img {
+  width: 80%;
+  height: 115%;
+  /* Extra height to accommodate translate parallax without edges showing */
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+  display: block;
+  /* Remove inline-gap whitespace */
+}
+
+/* ── Editorial — full-bleed image with floating glass card ─── */
+.layout-editorial {
+  position: relative;
+}
+
+.layout-editorial__media {
+  width: 100%;
+  height: 680px;
+  overflow: hidden;
+}
+
+.layout-editorial__img {
+  width: 100%;
+  height: 115%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.layout-editorial__card {
+  position: absolute;
+  bottom: var(--space-12);
+  right: var(--space-12);
+  max-width: 380px;
+}
+
+/* ── Staggered card row (3 cards, different vertical offsets) ─ */
+.layout-stagger {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.layout-stagger>*:nth-child(2) {
+  margin-top: var(--space-10);
+}
+
+.layout-stagger>*:nth-child(3) {
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 1024px) {
+  .layout-stagger {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .layout-stagger>*:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .layout-stagger>*:nth-child(3) {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .layout-stagger {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Services Grid — 6 cards, responsive 3×2 → 2×2 → 1×1 (CONTENT.md alignment) ─ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Commodity Grid — masonry staggered (DESIGN.md §7.5) ───── */
+.commodity-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
+  gap: var(--space-3);
+}
+
+.commodity-grid>*:first-child {
+  grid-row: span 2;
+  min-height: 480px;
+}
+
+.commodity-grid>*:not(:first-child) {
+  aspect-ratio: 4/3;
+}
+
+@media (max-width: 1024px) {
+  .commodity-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .commodity-grid>*:first-child {
+    grid-column: 1 / -1;
+    grid-row: span 1;
+    min-height: 280px;
+    aspect-ratio: 16/7;
+  }
+}
+
+@media (max-width: 640px) {
+  .commodity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Fleet Gallery Grid (5 items — irregular but balanced) ─── */
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.fleet-grid>*:first-child {
+  grid-column: span 2;
+}
+
+@media (max-width: 1024px) {
+  .fleet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fleet-grid>*:first-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .fleet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-grid>*:first-child {
+    grid-column: span 1;
+  }
+}
+
+/* ── Trust Bar — 3 equal cols with divider lines ───────────── */
+.trust-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.trust-bar__item {
+  padding: var(--space-8) var(--space-10);
+  text-align: center;
+  border-right: 1px solid var(--apex-stone);
+}
+
+.trust-bar__item:last-child {
+  border-right: none;
+}
+
+/* ── Trust Bar Mobile (≤640px) ─────────────────────────────── */
+@media (max-width: 640px) {
+  .trust-bar__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .trust-bar__item {
+    padding: var(--space-4) var(--space-2);
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+/* ── Contact CTA Stack ─────────────────────────────────────── */
+.contact-cta-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.contact-cta__contact {
+  text-align: center;
+}
+
+.contact-cta__form {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .contact-cta-stack {
+    align-items: stretch;
+    gap: var(--space-6);
+  }
+}

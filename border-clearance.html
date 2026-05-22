@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Bonded carrier status. Ground agents at Beit Bridge, Kasumbalesa, Chirundu, Kazungula. We clear borders – every time.">
+  <title>Border Clearance Excellence – 8 Countries – Apex Transport</title>
+  <style>.coverage-sticky{pointer-events:none!important}.coverage-sticky.is-visible{pointer-events:auto!important}</style>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/components.css?v=3">
+   <link rel="icon" href="/favicon-96x96.png" sizes="96x96">
+  <style>
+    /* Country accordion (CSS :checked fallback for Tier 1) */
+    .country-accordion { display:flex; flex-direction:column; gap: var(--space-3); margin-top: var(--space-10); }
+    .country-item { border: 1px solid var(--apex-stone); border-radius: 8px; overflow: hidden; }
+    .country-item input { display:none; }
+    .country-label {
+      display:flex; justify-content:space-between; align-items:center;
+      padding: var(--space-4) var(--space-5); background: var(--apex-off-white);
+      cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: var(--text-lg); color: var(--apex-navy);
+    }
+    .country-content {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out);
+      background: var(--apex-white); padding: 0 var(--space-5);
+    }
+    .country-item input:checked + .country-label .icon { transform: rotate(180deg); }
+    .country-item input:checked ~ .country-content { max-height: 300px; padding: var(--space-5); }
+    .country-detail { font-size: var(--text-sm); color: var(--apex-charcoal); line-height:1.6; }
+    .country-detail strong { color: var(--apex-navy); }
+    .icon { transition: transform 0.3s var(--ease-out); }
+  </style>
+</head>
+<body>
+
+  <div id="site-nav">
+    <nav class="nav" role="banner"><div class="nav__container"><span>Loading…</span></div></nav>
+  </div>
+
+  <div class="nav__mobile-footer" id="mobileFooter" aria-hidden="true">
+    <div class="nav__mobile-row">
+      <span>WhatsApp: <a href="https://wa.me/27729377143" class="nav__mobile-cta">072 937 7143</a></span>
+      <span>Based: South Africa</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Border Clearance Hero -->
+    <section class="hero section--dark" id="border-hero">
+      <div class="hero__media">
+        <img src="/webp/img_2.webp" alt="Apex customs agent reviewing documents at a border gate." class="hero__img" data-parallax="0.2" fetchpriority="high">
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content container">
+        <span class="hero__eyebrow">Border Clearance Excellence</span>
+        <h1 class="hero__title">We clear borders.<br>Every time.</h1>
+        <p class="hero__subtitle">Bonded carrier status. Ground agents. 8 countries.</p>
+      </div>
+    </section>
+
+    <!-- Border Process Summary -->
+    <section class="section section--light">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-header__eyebrow">Our Capability</span>
+          <h2 class="section-header__title">Bonded Carrier Across 8 Countries</h2>
+        </header>
+        <p style="font-size: var(--text-lg); color: var(--apex-charcoal); max-width: 800px; line-height:1.7;">
+          We hold bonded carrier status across Beit Bridge, Kazungula, Chirundu, Kasumbalesa, Mchinji, Tlokweng, and more.
+        </p>
+
+        <div class="timeline reveal" style="margin-top: var(--space-16);" aria-label="Border clearance process steps">
+          <div class="timeline__track"><div class="timeline__track-fill"></div></div>
+          <div class="timeline__step">
+            <div class="timeline__node">1</div>
+            <span class="timeline__label">Document Check</span>
+            <span class="timeline__sub">Verified before truck leaves yard.</span>
+          </div>
+          <div class="timeline__step">
+            <div class="timeline__node">2</div>
+            <span class="timeline__label">Customs Lodge</span>
+            <span class="timeline__sub">ASYCUDA declarations submitted electronically.</span>
+          </div>
+          <div class="timeline__step">
+            <div class="timeline__node">3</div>
+            <span class="timeline__label">Transit Permit</span>
+            <span class="timeline__sub">Countryâ€‘specific permits obtained.</span>
+          </div>
+          <div class="timeline__step">
+            <div class="timeline__node">4</div>
+            <span class="timeline__label">Crossing Complete</span>
+            <span class="timeline__sub">Load confirmed through.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Country Quick Reference (Accordion) -->
+    <section class="section section--light">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-header__eyebrow">Country Guide</span>
+          <h2 class="section-header__title">Border Posts & Clearance Times</h2>
+        </header>
+
+        <div class="country-accordion">
+          <!-- South Africa -->
+          <div class="country-item">
+            <input type="checkbox" id="country-sa" name="country">
+            <label class="country-label" for="country-sa">
+              <span>ðŸ‡¿ðŸ‡¦ South Africa</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Beit Bridge (ZIM), Tlokweng (BOT)</p>
+                <p><strong>Time:</strong> 4â€“8 hours</p>
+                <p><strong>Note:</strong> SARS eâ€‘filing, CRW clearance handled by Apex.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Zimbabwe -->
+          <div class="country-item">
+            <input type="checkbox" id="country-zw" name="country">
+            <label class="country-label" for="country-zw">
+              <span>ðŸ‡¿ðŸ‡¼ Zimbabwe</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Beit Bridge (SA), Chirundu (ZAM)</p>
+                <p><strong>Time:</strong> 4â€“10 hours</p>
+                <p><strong>Note:</strong> ZIMRA import permit, transit bond.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Zambia -->
+          <div class="country-item">
+            <input type="checkbox" id="country-zm" name="country">
+            <label class="country-label" for="country-zm">
+              <span>ðŸ‡¿ðŸ‡² Zambia</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Chirundu (ZIM), Kazungula (BOT/ZAM), Kasumbalesa (DRC)</p>
+                <p><strong>Time:</strong> 2â€“12 hours</p>
+                <p><strong>Note:</strong> ZRA clearance, COMESA certificate.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- DRC -->
+          <div class="country-item">
+            <input type="checkbox" id="country-drc" name="country">
+            <label class="country-label" for="country-drc">
+              <span>ðŸ‡¨ðŸ‡© DRC</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Kasumbalesa (ZAM)</p>
+                <p><strong>Time:</strong> 6â€“24 hours</p>
+                <p><strong>Note:</strong> OGEFREM certificate, Frenchâ€‘speaking agents.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Malawi -->
+          <div class="country-item">
+            <input type="checkbox" id="country-mw" name="country">
+            <label class="country-label" for="country-mw">
+              <span>ðŸ‡²ðŸ‡¼ Malawi</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Mchinji (ZAM)</p>
+                <p><strong>Time:</strong> 4â€“8 hours</p>
+                <p><strong>Note:</strong> MRA clearance, COMESA certificate.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botswana -->
+          <div class="country-item">
+            <input type="checkbox" id="country-bw" name="country">
+            <label class="country-label" for="country-bw">
+              <span>ðŸ‡§ðŸ‡¼ Botswana</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Tlokweng (SA), Kazungula (ZAM)</p>
+                <p><strong>Time:</strong> 2â€“4 hours</p>
+                <p><strong>Note:</strong> BURS clearance, fastest corridor.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mozambique -->
+          <div class="country-item">
+            <input type="checkbox" id="country-mz" name="country">
+            <label class="country-label" for="country-mz">
+              <span>ðŸ‡²ðŸ‡¿ Mozambique</span>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="country-content">
+              <div class="country-detail">
+                <p><strong>Posts:</strong> Lebombo, Ressano Garcia</p>
+                <p><strong>Time:</strong> 4â€“8 hours</p>
+                <p><strong>Note:</strong> Maputo corridor specialist.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Block -->
+    <section class="section section--dark cta-banner">
+      <div class="container">
+        <div class="cta-banner__content">
+          <h2 class="cta-banner__title">Ready to clear your next border?</h2>
+          <p class="cta-banner__sub">Tell us your route and cargo. We handle every document.</p>
+          <div class="cta-banner__actions">
+            <a href="/contact.html" class="btn btn-primary">Get a Quote â†’</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer" style="display:none;"><footer class="footer"><div class="container"><span>Loading…</span></div></footer></div>
+
+
+  <script src="/js/content.js" defer></script>
+  <script src="/js/tier.js" defer></script>
+      <script src="/js/shared-nav.js" defer></script>
+<script src="/js/nav.js" defer></script>
+  <script src="/js/scroll.js" defer></script>
+  <script src="/js/reveal.js" defer></script>
+  <script src="/js/form.js" defer></script>
+  <script src="/js/tracking.js" defer></script>
+  <script src="/js/main.js" defer></script>
+  <script src="/js/parallax.js" defer></script>
+</body>
+</html>
