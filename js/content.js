@@ -132,7 +132,7 @@
 
     container.innerHTML = links.map(function(link) {
       return '<a href="' + link.href + '" class="nav__link">' + link.label + '</a>';
-    }).join('');
+    }).join('') + '<div id="nav-backdrop" aria-hidden="true"></div>';
   }
 
   function buildTicker() {
@@ -680,12 +680,14 @@
       apexContentNow: !!apexContent
     });
     _contentLoaded = true;
+    var _built = false;
     if (data) {
       buildAll();
+      _built = true;
     } else {
       console.warn('[Apex Content] No content data loaded; dynamic content will be missing');
     }
-    if (_navInjectedDone) buildAll();
+    if (_navInjectedDone && !_built) buildAll();
   });
   window.apexContentReady = contentPromise;
 

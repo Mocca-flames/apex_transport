@@ -15,15 +15,20 @@
   var lenis = window.getLenis ? window.getLenis() : null;
 
   function initNav() {
+    if (initNav._initialized) return;
     nav = document.querySelector('.nav');
     menu = nav ? nav.querySelector('.nav__menu') : null;
     toggle = nav ? nav.querySelector('.nav__toggle') : null;
     closeBtn = nav ? nav.querySelector('.nav__menu-close') : null;
     mobileFooter = document.getElementById('mobileFooter');
     if (!nav || !menu || !toggle) return;
+    initNav._initialized = true;
+
+    var _suppressScrollClose = false;
 
     // ── Open / close ──────────────────────────────────────────
     function openMenu() {
+      _suppressScrollClose = true;
       toggle.setAttribute('aria-expanded', 'true');
       menu.classList.add('is-open');
       if (mobileFooter) mobileFooter.classList.add('is-visible');
@@ -38,6 +43,10 @@
       document.body.style.width = '100%';
       document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(function () {
+        _suppressScrollClose = false;
+      });
     }
 
     function closeMenu() {
@@ -86,6 +95,7 @@
     }
 
     document.addEventListener('scroll', function onMenuScroll() {
+      if (_suppressScrollClose) return;
       if (menu.classList.contains('is-open')) {
         closeMenu();
       }

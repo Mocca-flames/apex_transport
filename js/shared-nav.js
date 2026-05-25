@@ -7,7 +7,7 @@
   'use strict';
 
   // ── helpers ──────────────────────────────────────────────────
-  function inject(id, url) {
+  function inject(id, url, eventName) {
     var el = document.getElementById(id);
     if (!el) return;
     fetch(url, { credentials: 'same-origin' })
@@ -15,13 +15,14 @@
       .then(function (html) {
         if (html) {
           el.innerHTML = html;
-          document.dispatchEvent(new CustomEvent('nav:injected'));
+          if (eventName) {
+            document.dispatchEvent(new CustomEvent(eventName));
+          }
         }
       })
       .catch(function () { /* leave empty — CSS fallback keeps layout */ });
   }
 
-  // ── load nav + footer ─────────────────────────────────────────
-  inject('site-nav', '/partials/nav.html');
+  inject('site-nav', '/partials/nav.html', 'nav:injected');
   inject('site-footer', '/partials/footer.html');
 })();
