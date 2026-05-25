@@ -297,10 +297,7 @@
       slidesHtml +=
         '<div class="coverage-slide" data-index="' + index + '">' +
           '<div class="coverage-slide__frame">' +
-            '<picture>' +
-              '<source media="(max-width: 1024px)" srcset="/country_mobile/' + codeMap[country.name] + '.webp" type="image/webp">' +
-              '<img class="coverage-slide__map" src="/experiment/' + codeMap[country.name] + '.webp" alt="' + country.name + ' — ' + country.status + '" loading="lazy" decoding="async">' +
-            '</picture>' +
+            '<img class="coverage-slide__map" src="/experiment/' + codeMap[country.name] + '.webp" alt="' + country.name + ' — ' + country.status + '" loading="lazy" decoding="async">' +
             '<p class="coverage-slide__text"><strong>' + country.status + '</strong> — ' + descMap[country.name] + '</p>' +
           '</div>' +
         '</div>';
