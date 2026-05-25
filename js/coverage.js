@@ -31,6 +31,31 @@
     var section = document.getElementById('coverage');
     if (!section) return;
 
+    /* ── Mobile (≤1024px): disable scroll-jacking, use interactive selector ── */
+    var isMobile = window.matchMedia('(max-width: 1024px)').matches;
+    if (isMobile) {
+      section.classList.add('coverage--static');
+      buildCoverageSelector(section);
+
+      /* Rebuild selector whenever content.js rebuilds the coverage DOM */
+      var mobileMo = new MutationObserver(function (mutations) {
+        var slidesContainer = section.querySelector('.coverage-journey__slides');
+        var labelsContainer = section.querySelector('.coverage-progress__labels');
+
+        var relevant = mutations.some(function (m) {
+          return (slidesContainer && (slidesContainer.contains(m.target) || m.target === slidesContainer)) ||
+                 (labelsContainer && (labelsContainer.contains(m.target) || m.target === labelsContainer));
+        });
+        if (!relevant) return;
+
+        var slides = section.querySelectorAll('.coverage-slide');
+        if (!slides.length) return;
+        buildCoverageSelector(section);
+      });
+      mobileMo.observe(section, { childList: true, subtree: true });
+      return;
+    }
+
     var track  = section.querySelector('.coverage-track');
     var sticky = section.querySelector('.coverage-sticky');
     var slides = section.querySelectorAll('.coverage-slide');
@@ -219,6 +244,101 @@
     }
 
     onScroll(); /* run once on init in case page loads mid-section */
+  }
+
+  /**
+   * Build the interactive country selector for mobile (≤1024px).
+   * Reads existing .coverage-slide elements (built by content.js) and
+   * constructs a horizontal pill bar + map image + detail card.
+   */
+  function buildCoverageSelector(section) {
+    var selector = section.querySelector('.coverage-selector');
+    if (!selector) return;
+
+    var slides = section.querySelectorAll('.coverage-slide');
+    if (!slides.length) return;
+
+    var countries = [];
+    slides.forEach(function (slide) {
+      var img = slide.querySelector('img');
+      var textEl = slide.querySelector('.coverage-slide__text');
+      if (!textEl) return;
+
+      var strong = textEl.querySelector('strong');
+      var status = strong ? strong.textContent : '';
+      var rawText = textEl.textContent || '';
+      var descPrefix = status ? (status + ' \u2014 ') : '';
+      var description = rawText.replace(descPrefix, '').trim();
+      var imgSrc = img ? img.src : '';
+
+      var idx = parseInt(slide.dataset.index, 10);
+      var label = section.querySelector('.coverage-progress__label[data-index="' + idx + '"]');
+      var name = label ? label.textContent : ('Country ' + (idx + 1));
+
+      countries.push({ name: name, status: status, description: description, imgSrc: imgSrc, index: idx });
+    });
+
+    countries.sort(function (a, b) { return a.index - b.index; });
+    if (!countries.length) return;
+
+    var pillsHtml = '';
+    countries.forEach(function (country, i) {
+      var dotClass = country.status === 'Hub' ? 'hub' : country.status === 'Specialist' ? 'specialist' : 'active';
+      var activeClass = i === 0 ? ' is-active' : '';
+      pillsHtml +=
+        '<button class="coverage-selector__pill' + activeClass + '" data-index="' + i + '" type="button" aria-pressed="' + (i === 0 ? 'true' : 'false') + '">' +
+          '<span class="coverage-selector__pill-dot coverage-selector__pill-dot--' + dotClass + '" aria-hidden="true"></span>' +
+          '<span class="coverage-selector__pill-name">' + country.name + '</span>' +
+        '</button>';
+    });
+
+    var first = countries[0];
+    var firstDotClass = first.status === 'Hub' ? 'hub' : first.status === 'Specialist' ? 'specialist' : 'active';
+
+    selector.innerHTML =
+      '<div class="coverage-selector__map">' +
+        '<img class="coverage-selector__map-img" src="' + first.imgSrc + '" alt="' + first.name + ' coverage map" loading="lazy" decoding="async">' +
+      '</div>' +
+      '<div class="coverage-selector__pills" role="tablist" aria-label="Select country">' +
+        pillsHtml +
+      '</div>' +
+      '<div class="coverage-selector__detail" aria-live="polite">' +
+        '<span class="coverage-selector__status coverage-selector__status--' + firstDotClass + '">' + first.status + '</span>' +
+        '<p class="coverage-selector__desc">' + first.description + '</p>' +
+      '</div>';
+
+    selector.querySelectorAll('.coverage-selector__pill').forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        var idx = parseInt(this.dataset.index, 10);
+        var country = countries[idx];
+        if (!country) return;
+
+        selector.querySelectorAll('.coverage-selector__pill').forEach(function (p) {
+          p.classList.remove('is-active');
+          p.setAttribute('aria-pressed', 'false');
+        });
+        this.classList.add('is-active');
+        this.setAttribute('aria-pressed', 'true');
+
+        var mapImg = selector.querySelector('.coverage-selector__map-img');
+        if (mapImg && mapImg.src !== country.imgSrc) {
+          mapImg.style.opacity = '0.3';
+          mapImg.src = country.imgSrc;
+          mapImg.alt = country.name + ' coverage map';
+          mapImg.onload = function () { mapImg.style.opacity = '1'; };
+        }
+
+        var detail = selector.querySelector('.coverage-selector__detail');
+        if (detail) {
+          var dotClass = country.status === 'Hub' ? 'hub' : country.status === 'Specialist' ? 'specialist' : 'active';
+          detail.innerHTML =
+            '<span class="coverage-selector__status coverage-selector__status--' + dotClass + '">' + country.status + '</span>' +
+            '<p class="coverage-selector__desc">' + country.description + '</p>';
+        }
+
+        this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+    });
   }
 
   window.initCoverage = initCoverage;
