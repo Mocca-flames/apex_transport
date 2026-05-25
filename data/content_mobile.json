@@ -63,13 +63,13 @@
       "stats": [
         { "value": "8", "label": "Countries", "sub": "Africa" },
         { "value": "24/7", "label": "Tracking", "sub": "Live updates" },
-        { "value": "48h", "label": "Clearance", "sub": "Processing" }
+        { "value": "6h", "label": "Clearance", "sub": "Processing" }
       ]
     },
     "servicesSection": {
       "label": "Services",
       "heading": "What We Do",
-      "intro": "Every step of the cross-border journey — managed end-to-end. From paperwork to final delivery.",
+      "intro": "From paperwork to final delivery. Your cross-border journey, fully managed.",
       "services": {
         "border-docs": {
           "id": "border-docs",
@@ -304,7 +304,7 @@
       { "label": "Trucks", "value": "120+" },
       { "label": "Classes", "value": "4" },
       { "label": "Tracked", "value": "100%" },
-      { "label": "Dispatch", "value": "48h" }
+      { "label": "Dispatch", "value": "6h" }
     ],
     "cta": {
       "heading": "Need a truck?",
@@ -465,7 +465,7 @@
       { "label": "Trucks", "value": "120+" },
       { "label": "Countries", "value": "6" },
       { "label": "Tracked", "value": "100%" },
-      { "label": "Dispatch", "value": "48h" }
+      { "label": "Dispatch", "value": "6h" }
     ],
     "cta": {
       "heading": "Need a truck?",

@@ -16,6 +16,52 @@
     var dotsWrap = document.getElementById('js-progress-dots');
     var lenis    = window.getLenis ? window.getLenis() : null;
 
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+      track.classList.add('services--static');
+
+      var mobilePanels = document.querySelectorAll('.services-panel');
+      var mobileImages = document.querySelectorAll('.services-image');
+
+      mobilePanels.forEach(function(panel) {
+        var serviceIndex = parseInt(panel.dataset.service, 10);
+        var img = mobileImages[serviceIndex] && mobileImages[serviceIndex].querySelector('img');
+        if (img && !panel.querySelector('.services-panel__mobile-img')) {
+          var mobileImg = document.createElement('img');
+          mobileImg.className = 'services-panel__mobile-img';
+          mobileImg.src     = img.src;
+          mobileImg.alt     = img.alt;
+          mobileImg.width   = img.width;
+          mobileImg.height  = img.height;
+          mobileImg.loading = 'lazy';
+          panel.insertBefore(mobileImg, panel.firstChild);
+        }
+        panel.classList.add('is-active');
+      });
+
+      var staticMo = new MutationObserver(function() {
+        var livePanels = document.querySelectorAll('.services-panel');
+        var liveImages = document.querySelectorAll('.services-image');
+        livePanels.forEach(function(panel) {
+          if (panel.classList.contains('is-active') && panel.querySelector('.services-panel__mobile-img')) return;
+          var serviceIndex = parseInt(panel.dataset.service, 10);
+          var img = liveImages[serviceIndex] && liveImages[serviceIndex].querySelector('img');
+          if (img && !panel.querySelector('.services-panel__mobile-img')) {
+            var mobileImg = document.createElement('img');
+            mobileImg.className = 'services-panel__mobile-img';
+            mobileImg.src     = img.src;
+            mobileImg.alt     = img.alt;
+            mobileImg.width   = img.width;
+            mobileImg.height  = img.height;
+            mobileImg.loading = 'lazy';
+            panel.insertBefore(mobileImg, panel.firstChild);
+          }
+          panel.classList.add('is-active');
+        });
+      });
+      staticMo.observe(track, { childList: true, subtree: true });
+      return;
+    }
+
     console.log('[services] init', {
       track: !!track, panels: panels.length, images: images.length,
       fill: !!fill, dotsWrap: !!dotsWrap, lenis: !!lenis,

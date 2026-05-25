@@ -65,7 +65,7 @@
       "stats": [
         { "value": "8", "label": "Countries", "sub": "Southern & Central Africa" },
         { "value": "24/7", "label": "Monitoring", "sub": "Dispatch team always on" },
-        { "value": "48h", "label": "Clearance", "sub": "Fast border processing" }
+        { "value": "6h", "label": "Clearance", "sub": "Fast border processing" }
       ]
     },
     "servicesSection": {
