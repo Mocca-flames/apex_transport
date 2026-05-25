@@ -386,10 +386,13 @@
     var contactContainer = document.querySelector('[data-footer-contact]');
     if (contactContainer) {
       var phone = get('global.contact.whatsapp') || '072 937 7143';
-      var email = get('global.contact.email') || 'dispatch@apextransport.co.za';
+      var email = get('global.contact.email') || 'evah@apextransportgroup.co.za';
       contactContainer.innerHTML =
-        '<a href="https://wa.me/27729377143" class="footer__link">WhatsApp: ' + phone + '</a>' +
+        '<span class="footer__link">WhatsApp: ' + phone + '</span>' +
         '<a href="tel:0729377143" class="footer__link">Call: ' + phone + '</a>' +
+        '<a href="mailto:evah@apextransportgroup.co.za" class="footer__link">evah@apextransportgroup.co.za</a>' +
+        '<a href="mailto:tumelo@apextransportgroup.co.za" class="footer__link">tumelo@apextransportgroup.co.za</a>' +
+        '<a href="mailto:junior@apextransportgroup.co.za" class="footer__link">junior@apextransportgroup.co.za</a>' +
         '<span class="footer__link">Based in ' + get('global.contact.based') + '</span>';
     }
   }
@@ -667,8 +670,14 @@
   // (the event is also dispatched after footer injection).
   var _contentLoaded = false;
   var _navInjectedDone = false;
+  var _footerInjectedDone = false;
   document.addEventListener('nav:injected', function _retryBuild() {
     _navInjectedDone = true;
+    if (_contentLoaded) buildAll();
+  });
+
+  document.addEventListener('footer:injected', function _retryBuild() {
+    _footerInjectedDone = true;
     if (_contentLoaded) buildAll();
   });
 

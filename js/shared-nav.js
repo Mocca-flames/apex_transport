@@ -24,5 +24,5 @@
   }
 
   inject('site-nav', '/partials/nav.html', 'nav:injected');
-  inject('site-footer', '/partials/footer.html');
+  inject('site-footer', '/partials/footer.html', 'footer:injected');
 })();
