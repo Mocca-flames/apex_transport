@@ -291,16 +291,18 @@
 
 /* ── Contact CTA Stack ─────────────────────────────────────── */
 .contact-cta-stack {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+ 
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   gap: var(--space-8);
-  max-width: 640px;
+
   margin-inline: auto;
 }
 
 .contact-cta__contact {
-  text-align: center;
+  text-align: start;
 }
 
 .contact-cta__form {
