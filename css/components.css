@@ -1163,6 +1163,7 @@
   .services-track {
     margin-bottom: var(--space-2);
     padding: 0px;
+    background: var(--apex-off-white);
   }
 }
 
@@ -1223,6 +1224,7 @@
   background: var(--apex-off-white);
   margin: 0;
   padding: 0;
+  background-color: #fff;
 }
 
 .services-sticky {
@@ -1661,6 +1663,10 @@
 /* ── Coverage Journey — scroll-hijacked sticky section             */
 /* ───────────────────────────────────────────────────────────────── */
 
+.coverage-journey {
+  background: #fff;
+}
+
 /* Scroll track: creates the scrollable height */
 .coverage-track {
   height: calc(8 * 100svh);
@@ -2021,6 +2027,7 @@
 
 .coverage-journey.coverage--static .coverage-journey__slides {
   display: none;
+ 
 }
 
 .coverage-journey.coverage--static .coverage-progress {

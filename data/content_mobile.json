@@ -171,7 +171,7 @@
       "items": [
         { "title": "Box Trucks", "image": "webp/img_4.webp", "alt": "Regional box truck" },
         { "title": "Border Ready", "image": "webp/img_5.webp", "alt": "Border truck" },
-        { "title": "Long-Haul", "image": "webp/cross.webp", "alt": "Highway truck" },
+        { "title": "Long-Haul", "image": "avif/cross.afiv", "alt": "Highway truck" },
         { "title": "Bulk Cargo", "image": "webp/bulk.webp", "alt": "Bulk transport" }
       ]
     },
@@ -293,7 +293,7 @@
       "eyebrow": "Fleet",
       "heading": "Iron built for Africa",
       "sub": "GPS‑tracked and roadworthy‑certified.",
-      "image": "webp/cross.webp",
+      "image": "avif/cross.avif",
       "alt": "Long‑haul truck."
     },
     "gallery": [

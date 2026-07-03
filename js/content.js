@@ -192,11 +192,11 @@
 
     // Image mapping aligned to service index (0=border-docs, 1=customs-clearance, 2=route-planning, 3=transporter-network, 4=real-time-monitoring, 5=direct-communication)
     var images = [
-      { src: '/webp/services/border_documentation.webp', alt: 'Border Documentation — Coordinator handling customs paperwork with stamps and permits, truck waiting at border post' },
+      { src: '/avif/services/border_documentation.avif', alt: 'Border Documentation — Coordinator handling customs paperwork with stamps and permits, truck waiting at border post' },
       // TODO: add /webp/services/customs_clearance.webp; pending graphics generation — currently falls back to apex_coordination
       { src: '/webp/services/apex_coordination.webp',   alt: 'Customs Clearance — Apex coordination team managing freight at border, logistics operations overview' },
       { src: '/webp/services/route_planning.webp',     alt: 'Route Planning — Large African route map with analytics, optimized path highlighted across Southern and Central Africa' },
-      { src: '/webp/services/transporter_network.webp',alt: 'Transporter Network — Fleet yard with multiple trucks, dispatcher assigning loads to verified transporters' },
+      { src: '/avif/services/transporter_network.avif',alt: 'Transporter Network — Fleet yard with multiple trucks, dispatcher assigning loads to verified transporters' },
       { src: '/webp/services/realtime.webp',           alt: 'Real-Time Monitoring — GPS tracking screen showing truck actively moving, live monitoring centre with dispatch team' },
       { src: '/webp/services/direct_communication.webp',alt: 'Direct Communication — Coordinator on WhatsApp/headset talking to driver at border post, real-time support' }
     ];

@@ -174,7 +174,7 @@
       "items": [
         { "title": "Box Truck", "image": "webp/img_4.webp", "alt": "Box truck for regional runs" },
         { "title": "Cross-Border Ready", "image": "webp/img_5.webp", "alt": "Truck equipped for border crossings" },
-        { "title": "Long-Haul Specialists", "image": "webp/cross.webp", "alt": "Long-haul truck on highway" },
+        { "title": "Long-Haul Specialists", "image": "avif/cross.avif", "alt": "Long-haul truck on highway" },
         { "title": "Bulk Cargo", "image": "webp/bulk.webp", "alt": "Bulk cargo transport" },
         { "title": "Verified Partners", "image": "webp/varified_partners.webp", "alt": "Partner transporter fleet" }
       ]
@@ -344,7 +344,7 @@
       "eyebrow": "Our Fleet",
       "heading": "Iron built for African roads",
       "sub": "Every truck GPS‑tracked, roadworthy‑certified, and dispatched by our own team.",
-      "image": "webp/cross.webp",
+      "image": "avif/cross.avif",
       "alt": "Long‑haul truck on an African highway at sunset."
     },
     "gallery": [
@@ -360,7 +360,7 @@
       },
       {
         "title": "Long-Haul Specialists",
-        "image": "webp/cross.webp",
+        "image": "avif/cross.avif",
         "description": "Routes: JHB – Lusaka, JHB – Lubumbashi, JHB – Dar es Salaam."
       },
       {
