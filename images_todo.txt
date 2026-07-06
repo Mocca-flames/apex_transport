@@ -1,0 +1,101 @@
+# About Page — Image Requirements
+
+## Image Philosophy
+Every section tells a story through images FIRST, text supports the visual narrative.
+Images should be cinematic, authentic, and capture the human element of African logistics.
+
+---
+
+## 1. Hero Section — "Proudly South African"
+**Current:** /avif/long_haul.avif (fleet on corridor)
+**Status:** ✅ Available — works well
+
+---
+
+## 2. Our Story — "From Local to Pan-African"
+**Needed Image:** `about-story.webp`
+**Description:** Aerial/drone shot of Apex fleet trucks lined up at sunrise in Midrand depot, golden hour light, Johannesburg skyline or mine landscape in background
+**Mood:** Origin story, humble beginnings, growth
+**Style:** Wide landscape, cinematic color grade, warm tones
+
+---
+
+## 3. Who We Are — "The People Behind the Wheels"
+**Needed Image:** `about-team.webp`
+**Description:** candid shot of Apex operations team in the dispatch office — screens showing GPS tracking, someone on WhatsApp, whiteboards with route plans. Human, busy, authentic.
+**Mood:** Hands-on operations, real people, not a platform
+**Style:** Environmental portrait, natural lighting, documentary feel
+
+---
+
+## 4. Our Values — "Reliability First"
+**Needed Image:** `about-values-bg.webp`
+**Description:** Dramatic wide shot of a single truck on an open African highway at dusk, headlights cutting through twilight, vast landscape
+**Mood:** Solitude, commitment, the road ahead
+**Style:** Cinematic, high contrast, moody
+
+---
+
+## 5. Where We Operate — "8 Countries, One Mission"
+**Needed Images:** Country-specific atmospheric shots
+- `about-sa.webp` — Johannesburg/Midrand skyline or depot at golden hour
+- `about-zw.webp` — Beit Bridge border post, trucks queuing, sunset
+- `about-zm.webp` — Copperbelt mine landscape, haul trucks
+- `about-drc.webp` — Kasumbalesa border crossing, lush vegetation
+- `about-bw.webp` — Kalahari landscape with freight truck on Trans-Kalahari
+- `about-ml.webp` — Malawi tea plantation or agricultural scene
+- `about-tz.webp` — Dar es Salaam port, container ships
+- `about-mz.webp` — Maputo corridor, coastal landscape
+
+**Status:** Partial — /experiment/*.webp files exist but are map-style, not atmospheric
+
+---
+
+## 6. Our Process — "How We Move Cargo"
+**Needed Images:** Process step visuals
+- `about-process-1.webp` — Client meeting, handshake, discussing cargo
+- `about-process-2.webp` — Truck selection, fleet yard with different vehicle types
+- `about-process-3.webp` — Border documentation, customs agent with papers
+- `about-process-4.webp` — Driver briefing, truck at gate ready to depart
+- `about-process-5.webp` — GPS monitoring screen, operations center
+
+**Status:** ❌ Missing — need documentary-style photos
+
+---
+
+## 7. Network & Partnerships
+**Needed Image:** `about-network.webp`
+**Description:** Collage-style or single shot showing fleet diversity — flatdeck, side-tipper, tanker, lowbed — all Apex-branded or partner trucks
+**Mood:** Strength in numbers, network power
+**Style:** Dynamic composition, multiple vehicles
+
+---
+
+## 8. Stats Bar Background
+**Needed Image:** `about-stats-bg.webp`
+**Description:** Subtle texture — close-up of truck tire on gravel, or road surface with painted lines
+**Mood:** Grounded, industrial, tactile
+**Style:** Macro/close-up, shallow depth of field
+
+---
+
+## Summary
+### Already Available ✅
+- long_haul.avif — hero section
+- hero-desktop.avif — could repurpose
+- cross.avif — fleet diversity
+- bulk_cargo.avif — cargo types
+- box_truck.webp — vehicle types
+- webp/services/*.webp — operations shots
+- experiment/*.webp — country maps (not atmospheric)
+
+### Need to Create ❌
+1. about-story.webp — fleet at sunrise (Midrand depot)
+2. about-team.webp — operations office candid
+3. about-values-bg.webp — single truck, dusk highway
+4. about-sa.webp through about-mz.webp — 8 country atmospheric shots
+5. about-process-1.webp through about-process-5.webp — process visuals
+6. about-network.webp — fleet diversity
+7. about-stats-bg.webp — texture background
+
+### Total: ~14 new images needed
