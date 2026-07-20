@@ -580,6 +580,24 @@
     injectSimpleContent(); // resolve any data-content markers injected above
   }
 
+  function buildConsolidationFaq() {
+    var container = document.getElementById('consolidation-faq-list');
+    if (!container) return;
+    var faqItems = get('consolidation.faq.items');
+    if (!faqItems || !faqItems.length) return;
+
+    container.innerHTML = faqItems.map(function(item) {
+      return (
+        '<details class="faq-item">' +
+          '<summary>' + item.question + '</summary>' +
+          '<div class="faq-item__body">' +
+            '<p>' + item.answer + '</p>' +
+          '</div>' +
+        '</details>'
+      );
+    }).join('');
+  }
+
 
   function buildAll() {
     buildNav();
@@ -592,6 +610,7 @@
     buildTechBannerPills();
     buildFooter();
     buildAbout();
+    buildConsolidationFaq();
     injectSimpleContent();
 
     console.log('[content] buildAll complete', {

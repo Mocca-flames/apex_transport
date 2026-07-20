@@ -2713,6 +2713,83 @@
   }
 }
 
+/* ── Consolidation — mobile responsive ─────────────────────── */
+@media (max-width: 768px) {
+
+  /* Remove forced min-height */
+  #consolidation-summary .layout-feature {
+    min-height: auto !important;
+  }
+
+  /* Section spacing */
+  #consolidation-summary {
+    padding-top: var(--space-10) !important;
+    padding-bottom: var(--space-8) !important;
+  }
+
+  /* Row spacing */
+  #consolidation-summary > .container {
+    margin-top: var(--space-10) !important;
+  }
+
+  /* Image container: wider aspect, no forced height */
+  #consolidation-summary .feature-split__media-consolidation {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
+    margin-bottom: var(--space-4);
+  }
+
+  #consolidation-summary .feature-split__media-consolidation .feature-split__img {
+    height: 100%;
+    margin-top: 0;
+  }
+
+  /* Text: reduce padding, let it breathe */
+  #consolidation-summary .feature-split__content {
+    padding: 0 var(--container-pad) !important;
+  }
+
+  /* Reversed rows: image first on mobile */
+  #consolidation-summary .layout-feature--reverse {
+    grid-template-columns: 1fr;
+  }
+
+  #consolidation-summary .layout-feature--reverse .feature-split__media-consolidation {
+    order: -1;
+    margin-bottom: var(--space-4);
+  }
+
+  #consolidation-summary .layout-feature--reverse .feature-split__content {
+    padding: 0 var(--container-pad) !important;
+  }
+
+  /* Title */
+  .consolidation-split__title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  /* Body */
+  .consolidation-split__body {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  /* Calculator row: stack slider */
+  .consolidation-mini-calc__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .consolidation-mini-calc__value {
+    text-align: left;
+  }
+}
+
 /* ════════════════════════════════════════════════════════════════
    ║ Load Gauge — SVG truck-and-trailer component
    ╚ Reusable — full-size on consolidation loads page,
@@ -3431,16 +3508,17 @@
     padding: var(--space-3) var(--space-4);
   }
 
+  .corridor-table__th-action {
+    text-align: center;
+    width: 120px;
+  }
+
   .corridor-table td {
     font-size: var(--text-sm);
     color: var(--apex-charcoal);
     padding: var(--space-3) var(--space-4);
     border-bottom: 1px solid var(--apex-stone);
     vertical-align: middle;
-  }
-
-  .corridor-table__corridor {
-    white-space: nowrap;
   }
 
   .corridor-table tbody tr:last-child td {
@@ -3455,8 +3533,44 @@
     background: var(--apex-orange-subtle);
   }
 
-  /* Route column */
+  /* Route column — text + flags */
   .corridor-table__route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .corridor-flags {
+    position: relative;
+    width: 28px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .corridor-flag {
+    position: absolute;
+    width: 28px;
+    height: 20px;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+    object-fit: cover;
+  }
+
+  /* SA flag behind (left), destination flag on top (skewed right) */
+  .corridor-flag:first-child {
+    z-index: 2;
+    bottom: -8px;
+    left: 8px;
+  }
+
+  .corridor-flag:last-child {
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+  }
+
+  .corridor-table__route-text {
     display: flex;
     align-items: center;
     gap: var(--space-2);
@@ -3484,52 +3598,74 @@
     height: 100%;
   }
 
-  .corridor-table__country {
-    font-size: var(--text-xs);
-    color: var(--apex-muted);
-  }
-
-  /* Border post column */
+  /* Border post — plain text, no icon */
   .corridor-table__border {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
+    white-space: nowrap;
+    color: var(--apex-charcoal);
   }
 
-  .corridor-table__pin {
-    width: 14px;
-    height: 14px;
-    display: flex;
-    flex-shrink: 0;
-    color: var(--apex-orange);
-  }
-
-  .corridor-table__pin svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* ETA & freq columns */
+  /* Transit — bold, scannable */
   .corridor-table__eta {
     font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--apex-navy);
     white-space: nowrap;
   }
 
+  /* Frequency — simple text */
   .corridor-table__freq {
     white-space: nowrap;
-    vertical-align: middle;
-    padding-top: var(--space-4);
-    padding-bottom: var(--space-4);
+    color: var(--apex-charcoal);
   }
 
-  .corridor-table__freq .freq-bar {
-    height: 24px;
-    width: 5px;
+  /* Price column — hover to reveal CTA */
+  .corridor-table__price {
+    text-align: right;
+    white-space: nowrap;
   }
 
-  .corridor-table__freq .freq-label {
+  .price-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .price-link__value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--apex-navy);
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .price-link__cta {
+    position: absolute;
+    right: 0;
+    background: var(--apex-orange);
+    color: var(--apex-white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
     font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+    white-space: nowrap;
+  }
+
+  .price-link:hover .price-link__value {
+    opacity: 0;
+  }
+
+  .price-link:hover .price-link__cta {
+    opacity: 1;
   }
 }
 
@@ -3541,4 +3677,289 @@
   .freq-bar {
     transition: none;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FAQ / Accordion (Light sections)
+   Card style: white bg, stone border — matches service-card.
+   ══════════════════════════════════════════════════════════════ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  max-width: 1100px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.faq-item {
+  background: var(--apex-white);
+  border: 1px solid var(--apex-stone);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+
+.faq-item:hover {
+  border-color: var(--apex-orange);
+  box-shadow: 0 4px 16px rgba(13, 31, 60, 0.08);
+}
+
+.faq-item[open] {
+  border-color: var(--apex-orange);
+  box-shadow: 0 4px 20px rgba(194, 65, 12, 0.06);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--apex-navy);
+  line-height: 1.3;
+  list-style: none;
+  user-select: none;
+  position: relative;
+}
+
+/* Hide default marker across browsers */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker { display: none; content: ''; }
+
+/* Arrow indicator */
+.faq-item summary::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border-right: 2px solid var(--apex-orange);
+  border-bottom: 2px solid var(--apex-orange);
+  transform: rotate(45deg);
+  transition: transform var(--dur-base) var(--ease-out);
+  position: relative;
+  top: -2px;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(-135deg);
+  top: 2px;
+}
+
+/* Hover: move arrow subtly */
+.faq-item summary:hover::after {
+  border-color: var(--apex-orange-hot);
+}
+
+/* Focus ring */
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--apex-orange);
+  outline-offset: -2px;
+  border-radius: 12px;
+}
+
+.faq-item__body {
+  padding: 0 var(--space-6) var(--space-6);
+  font-size: var(--text-base);
+  color: var(--apex-charcoal);
+  line-height: 1.7;
+}
+
+.faq-item__body a {
+  color: var(--apex-orange);
+  text-decoration: underline;
+}
+
+.faq-item__body a:hover {
+  color: var(--apex-orange-hot);
+}
+
+/* Open animation via discrete keyframe hack */
+.faq-item[open] .faq-item__body {
+  animation: faq-fade-in 0.3s var(--ease-out);
+}
+
+@keyframes faq-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-item summary {
+    padding: var(--space-4) var(--space-5);
+    font-size: var(--text-base);
+  }
+  .faq-item__body {
+    padding: 0 var(--space-5) var(--space-5);
+    font-size: var(--text-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item summary::after,
+  .faq-item[open] .faq-item__body {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ── Dark section subtitle ──────────────────────────────────── */
+.section--dark .section-header__sub {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Corridor step details (process section) ────────────────── */
+.corridor-step details {
+  margin-top: var(--space-2);
+}
+
+.corridor-step summary {
+  font-size: var(--text-xs);
+  color: var(--apex-orange);
+  font-family: 'Barlow', sans-serif;
+}
+
+.corridor-step details p {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+  margin: var(--space-2) 0 0 0;
+}
+
+/* ── Glass card link accent ─────────────────────────────────── */
+.glass-card a {
+  color: var(--apex-orange);
+}
+
+/* ── Process Corridor (How It Works) ───────────────────────── */
+.process-corridor {
+  position: relative;
+  margin-top: var(--space-8);
+}
+
+/* --- road paths --- */
+.process-corridor__road { position: absolute; fill: none; pointer-events: none; }
+.process-corridor__road-bg {
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 3;
+  stroke-dasharray: 3 9;
+  stroke-linecap: round;
+}
+.process-corridor__road-fill {
+  stroke: var(--apex-orange);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 2200ms cubic-bezier(.65,0,.35,1);
+}
+
+/* desktop road/truck: horizontal, sits above the step row */
+.process-corridor__road--desktop { top: 0; left: 0; width: 100%; height: 40px; }
+.process-corridor__truck--desktop {
+  position: absolute; top: 0; left: 0;
+  transition: left 2200ms cubic-bezier(.65,0,.35,1);
+}
+.process-corridor__road--mobile,
+.process-corridor__truck--mobile { display: none; }
+
+.process-corridor__steps {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: 56px;
+  position: relative;
+  z-index: 1;
+}
+.corridor-step { flex: 1; text-align: center; }
+
+.corridor-step__stamp {
+  width: 56px; height: 56px; margin: 0 auto var(--space-2);
+  display: flex; align-items: center; justify-content: center;
+  border: 2px dashed var(--apex-orange);
+  border-radius: 50%;
+  transform: rotate(-6deg);
+  position: relative;
+  transition: transform 500ms ease, box-shadow 500ms ease;
+}
+.corridor-step__stamp::before {
+  content: ""; position: absolute; inset: 6px;
+  border-radius: 50%; background: var(--apex-orange);
+}
+.corridor-step__stamp span {
+  position: relative; z-index: 1;
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  color: var(--apex-navy); transform: rotate(6deg);
+}
+
+.corridor-step__label {
+  display: block; font-family: 'Barlow', sans-serif; font-weight: 600;
+  color: #fff; margin-bottom: 6px;
+}
+.corridor-step__sub { display: block; color: rgba(255,255,255,0.75); font-size: var(--text-sm); }
+
+/* active-step state, driven by data-active-step on the wrapper */
+.process-corridor[data-active-step="1"] .process-corridor__road-fill { stroke-dashoffset: 1200; }
+.process-corridor[data-active-step="2"] .process-corridor__road-fill { stroke-dashoffset: 600; }
+.process-corridor[data-active-step="3"] .process-corridor__road-fill { stroke-dashoffset: 0; }
+
+.process-corridor[data-active-step="1"] .process-corridor__truck--desktop { left: 0%; }
+.process-corridor[data-active-step="2"] .process-corridor__truck--desktop { left: calc(50% - 20px); }
+.process-corridor[data-active-step="3"] .process-corridor__truck--desktop { left: calc(100% - 40px); }
+
+.process-corridor[data-active-step="1"] .corridor-step[data-step="1"] .corridor-step__stamp,
+.process-corridor[data-active-step="2"] .corridor-step[data-step="2"] .corridor-step__stamp,
+.process-corridor[data-active-step="3"] .corridor-step[data-step="3"] .corridor-step__stamp {
+  transform: rotate(0deg) scale(1.08);
+  box-shadow: 0 0 0 6px rgba(217,123,63,0.15);
+}
+
+/* --- mobile: vertical corridor, stacked steps --- */
+@media (max-width: 768px) {
+  .process-corridor__road--desktop,
+  .process-corridor__truck--desktop { display: none; }
+  .process-corridor__road--mobile,
+  .process-corridor__truck--mobile { display: block; }
+
+  .process-corridor__road--mobile {
+    position: absolute; top: 0; left: 0; width: 40px; height: 100%;
+  }
+  .process-corridor__truck--mobile {
+    position: absolute; top: 0; left: 0;
+    transition: top 2200ms cubic-bezier(.65,0,.35,1);
+  }
+  .process-corridor[data-active-step="1"] .process-corridor__truck--mobile { top: 0; }
+  .process-corridor[data-active-step="2"] .process-corridor__truck--mobile { top: calc(50% - 20px); }
+  .process-corridor[data-active-step="3"] .process-corridor__truck--mobile { top: calc(100% - 40px); }
+
+  .process-corridor__steps {
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: 0;
+    padding-left: 56px; /* clears the vertical road */
+  }
+  .corridor-step { text-align: left; position: relative; }
+  .corridor-step__stamp { margin: 0 0 var(--space-2); position: absolute; left: -56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-corridor__road-fill,
+  .process-corridor__truck--desktop,
+  .process-corridor__truck--mobile,
+  .corridor-step__stamp { transition: none; }
+}
+
+/* ── Border tier toggle (calculator) ────────────────────────── */
+.calc-route-group[data-border-tier-container] {
+  display: none;
 }

@@ -7,40 +7,36 @@
   'use strict';
 
   var commodities = [
-    { id: 'all', label: 'All commodities', icon: 'grid' },
-    { id: 'minerals', label: 'Copper & minerals', icon: 'diamond' },
-    { id: 'sulphur', label: 'Sulphur & mining', icon: 'flask' },
-    { id: 'machinery', label: 'Machinery & parts', icon: 'settings' },
-    { id: 'construction', label: 'Cement & steel', icon: 'building' },
-    { id: 'fmcg', label: 'FMCG & retail', icon: 'cart' },
-    { id: 'textiles', label: 'Textiles & clothing', icon: 'shirt' },
-    { id: 'grain', label: 'Maize & grain', icon: 'leaf' },
+    { id: 'mining', label: 'Mining & minerals', icon: 'diamond' },
+    { id: 'industry', label: 'Industry & construction', icon: 'settings' },
+    { id: 'consumer', label: 'Consumer goods', icon: 'cart' },
+    { id: 'agriculture', label: 'Agriculture', icon: 'leaf' },
   ];
 
   var routes = [
     /* ── 1. North-South Corridor (60%+ of SADC cross-border freight) ─── */
-    { origin: 'Durban', destination: 'Harare', country: 'Zimbabwe', borderPost: 'Beitbridge', eta: '3–4 days', frequency: 'Daily', fits: ['machinery', 'fmcg', 'construction', 'minerals', 'sulphur'], priority: 1 },
-    { origin: 'Durban', destination: 'Lusaka', country: 'Zambia', borderPost: 'Chirundu', eta: '5–6 days', frequency: 'Mon, Thu', fits: ['minerals', 'machinery', 'construction', 'sulphur'], priority: 1 },
-    { origin: 'Durban', destination: 'Lubumbashi', country: 'DRC', borderPost: 'Beitbridge / Chirundu', eta: '7–8 days', frequency: 'Mon', fits: ['minerals', 'machinery', 'sulphur', 'construction'], priority: 1 },
-    { origin: 'Johannesburg', destination: 'Harare', country: 'Zimbabwe', borderPost: 'Beitbridge', eta: '2–3 days', frequency: 'Daily', fits: ['machinery', 'fmcg', 'construction', 'sulphur'], priority: 1 },
-    { origin: 'Johannesburg', destination: 'Lusaka', country: 'Zambia', borderPost: 'Chirundu', eta: '4–5 days', frequency: 'Mon, Thu', fits: ['minerals', 'machinery', 'sulphur'], priority: 1 },
-    { origin: 'Johannesburg', destination: 'Lubumbashi', country: 'DRC', borderPost: 'Beitbridge / Chirundu', eta: '6–7 days', frequency: 'Thu', fits: ['minerals', 'machinery', 'sulphur'], priority: 1 },
+    { origin: 'Durban', destination: 'Harare', country: 'Zimbabwe', borderPost: 'Beitbridge', eta: '3–4 days', frequency: 'Daily', fits: ['industry', 'consumer', 'mining'], priority: 1, price: 'R 14,500' },
+    { origin: 'Durban', destination: 'Lusaka', country: 'Zambia', borderPost: 'Chirundu', eta: '5–6 days', frequency: 'Mon, Thu', fits: ['mining', 'industry'], priority: 1, price: 'R 18,200' },
+    { origin: 'Durban', destination: 'Lubumbashi', country: 'DRC', borderPost: 'Beitbridge / Chirundu', eta: '7–8 days', frequency: 'Mon', fits: ['mining', 'industry'], priority: 1, price: 'R 22,800' },
+    { origin: 'Johannesburg', destination: 'Harare', country: 'Zimbabwe', borderPost: 'Beitbridge', eta: '2–3 days', frequency: 'Daily', fits: ['industry', 'consumer', 'mining'], priority: 1, price: 'R 12,900' },
+    { origin: 'Johannesburg', destination: 'Lusaka', country: 'Zambia', borderPost: 'Chirundu', eta: '4–5 days', frequency: 'Mon, Thu', fits: ['mining', 'industry'], priority: 1, price: 'R 16,700' },
+    { origin: 'Johannesburg', destination: 'Lubumbashi', country: 'DRC', borderPost: 'Beitbridge / Chirundu', eta: '6–7 days', frequency: 'Thu', fits: ['mining', 'industry'], priority: 1, price: 'R 21,400' },
 
     /* ── 2. Maputo Development Corridor (N4) ────────────────────────── */
-    { origin: 'Johannesburg', destination: 'Maputo', country: 'Mozambique', borderPost: 'Lebombo', eta: '1 day', frequency: 'Daily', fits: ['construction', 'fmcg', 'machinery'], priority: 2 },
+    { origin: 'Johannesburg', destination: 'Maputo', country: 'Mozambique', borderPost: 'Lebombo', eta: '1 day', frequency: 'Daily', fits: ['industry', 'consumer'], priority: 2, price: 'R 8,600' },
 
     /* ── 3. Trans-Kalahari Corridor ─────────────────────────────────── */
-    { origin: 'Windhoek', destination: 'Johannesburg', country: 'South Africa', borderPost: 'Ariamsvlei', eta: '3–4 days', frequency: 'Wed, Sat', fits: ['fmcg', 'textiles', 'machinery'], priority: 3 },
-    { origin: 'Johannesburg', destination: 'Gaborone', country: 'Botswana', borderPost: 'Skilpadshek', eta: '1–2 days', frequency: 'Daily', fits: ['fmcg', 'textiles'], priority: 3 },
+    { origin: 'Windhoek', destination: 'Johannesburg', country: 'South Africa', borderPost: 'Ariamsvlei', eta: '3–4 days', frequency: 'Wed, Sat', fits: ['consumer', 'industry'], priority: 3, price: 'R 11,200' },
+    { origin: 'Johannesburg', destination: 'Gaborone', country: 'Botswana', borderPost: 'Skilpadshek', eta: '1–2 days', frequency: 'Daily', fits: ['consumer'], priority: 3, price: 'R 7,800' },
 
     /* ── 4. Secondary cross-border routes ───────────────────────────── */
-    { origin: 'Johannesburg', destination: 'Lilongwe', country: 'Malawi', borderPost: 'Mwanza', eta: '5–6 days', frequency: 'Fri', fits: ['grain', 'textiles'], priority: 4 },
-    { origin: 'Johannesburg', destination: 'Mbabane', country: 'Eswatini', borderPost: 'Oshoek', eta: '1 day', frequency: 'Daily', fits: ['construction', 'fmcg'], priority: 4 },
-    { origin: 'Johannesburg', destination: 'Maseru', country: 'Lesotho', borderPost: 'Maseru Bridge', eta: '1 day', frequency: 'Daily', fits: ['textiles', 'fmcg'], priority: 4 },
+    { origin: 'Johannesburg', destination: 'Lilongwe', country: 'Malawi', borderPost: 'Mwanza', eta: '5–6 days', frequency: 'Fri', fits: ['agriculture', 'consumer'], priority: 4, price: 'R 19,500' },
+    { origin: 'Johannesburg', destination: 'Mbabane', country: 'Eswatini', borderPost: 'Oshoek', eta: '1 day', frequency: 'Daily', fits: ['industry', 'consumer'], priority: 4, price: 'R 6,400' },
+    { origin: 'Johannesburg', destination: 'Maseru', country: 'Lesotho', borderPost: 'Maseru Bridge', eta: '1 day', frequency: 'Daily', fits: ['consumer'], priority: 4, price: 'R 5,900' },
   ];
 
   var TOTAL_ROUTES = routes.length;
-  var activeCommodity = 'all';
+  var activeCommodity = 'mining';
 
   var corridorNames = {
     1: 'North-South Corridor',
@@ -49,13 +45,37 @@
     4: 'Cross-Border'
   };
 
+  var FLAG_CDN = 'https://flagcdn.com/w80/';
+  var countryCodes = {
+    'South Africa': 'za',
+    'Zimbabwe': 'zw',
+    'Zambia': 'zm',
+    'DRC': 'cd',
+    'Mozambique': 'mz',
+    'Botswana': 'bw',
+    'Malawi': 'mw',
+    'Eswatini': 'sz',
+    'Lesotho': 'ls'
+  };
+
+  function flagImg(code, label) {
+    return '<img src="' + FLAG_CDN + code + '.png" alt="' + label + '" class="corridor-flag" width="28" height="20" loading="lazy">';
+  }
+
+  function renderFlags(country) {
+    var destCode = countryCodes[country] || 'zz';
+    return '<span class="corridor-flags">'
+      + flagImg(destCode, country)
+      + flagImg('za', 'South Africa')
+      + '</span>';
+  }
+
   /* Day index map for frequency parsing */
   var DAY_INDEX = { mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6 };
   var DAY_LABELS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   /* ── SVG icon snippets (inline, feather-style) ─────────────── */
   var icons = {
-    grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>',
     leaf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>',
     diamond: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="1" transform="rotate(45 12 12)"/></svg>',
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
@@ -197,28 +217,33 @@
     }
     var html = '<table class="corridor-table">'
       + '<thead><tr>'
-      + '<th scope="col">Corridor</th>'
       + '<th scope="col">Route</th>'
-      + '<th scope="col">Border post</th>'
-      + '<th scope="col">Est. transit</th>'
-      
+      + '<th scope="col">Border Post</th>'
+      + '<th scope="col">Transit</th>'
+      + '<th scope="col">Frequency</th>'
+      + '<th scope="col" class="corridor-table__th-action">From</th>'
       + '</tr></thead>'
       + '<tbody>';
     visible.forEach(function (r) {
+      var whatsappMsg = encodeURIComponent('Hi, I need a consolidation quote for ' + r.origin + ' → ' + r.destination + ' (' + r.country + ')');
       html += '<tr>'
-        + '<td class="corridor-table__corridor"><span class="corridor-badge corridor-badge--' + r.priority + '">' + corridorNames[r.priority] + '</span></td>'
         + '<td class="corridor-table__route">'
+        + '<span class="corridor-table__route-text">'
         + '<span class="corridor-table__origin">' + r.origin + '</span>'
         + '<span class="corridor-table__arrow">' + icons.arrow + '</span>'
         + '<span class="corridor-table__dest">' + r.destination + '</span>'
-        + '<span class="corridor-table__country">' + r.country + '</span>'
+        + '</span>'
+        + renderFlags(r.country)
         + '</td>'
-        + '<td class="corridor-table__border">'
-        + '<span class="corridor-table__pin">' + icons.mapPin + '</span>'
-        + r.borderPost
-        + '</td>'
+        + '<td class="corridor-table__border">' + r.borderPost + '</td>'
         + '<td class="corridor-table__eta">' + r.eta + '</td>'
-        + '<td class="corridor-table__freq">' + renderFreqBars(r.frequency) + '</td>'
+        + '<td class="corridor-table__freq">' + r.frequency + '</td>'
+        + '<td class="corridor-table__price">'
+        + '<a href="https://wa.me/27729377143?text=' + whatsappMsg + '" class="price-link" target="_blank" rel="noopener">'
+        + '<span class="price-link__value">' + r.price + '</span>'
+        + '<span class="price-link__cta">Get Quote →</span>'
+        + '</a>'
+        + '</td>'
         + '</tr>';
     });
     html += '</tbody></table>';

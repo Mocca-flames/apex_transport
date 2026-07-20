@@ -509,13 +509,136 @@
     "footer": "Hands-on logistics across Southern and Central Africa. Every load moves — no excuses."
   },
 
+  "consolidation": {
+    "hero": {
+      "eyebrow": "Consolidation",
+      "headline": "One Truck.<br><span class=\"highlight\">Everyone's Cargo.</span>",
+      "subheadline": "Share a truck on your route — pay only for your tons.",
+      "ctaPrimary": { "label": "Get Estimate →", "href": "#calculator" },
+      "ctaSecondary": { "label": "How It Works →", "href": "#how-it-works" },
+      "image": "/avif/consolidation/mixed_cargo.avif",
+      "alt": "Truck with mixed cargo"
+    },
+    "howItWorks": {
+      "eyebrow": "Process",
+      "heading": "How It Works",
+      "sub": "3 steps. Shared truck. Lower cost.",
+      "steps": [
+        {
+          "label": "Drop-Off",
+          "sub": "Consignments arrive at depot and join a shared corridor run.",
+          "detail": "Drop freight today for a truck leaving tomorrow."
+        },
+        {
+          "label": "Consolidation",
+          "sub": "One truck, one load plan. Each shipper tracked individually.",
+          "detail": "See your portion, your cost, your delivery confirmation."
+        },
+        {
+          "label": "Departure",
+          "sub": "Truck leaves on Apex's existing corridor — same reliability, lower cost.",
+          "detail": "Same route, border agents, and monitoring as a dedicated truck."
+        }
+      ]
+    },
+    "calculator": {
+      "eyebrow": "Estimate",
+      "heading": "Instant Estimate",
+      "sub": "Move sliders. Price updates live.",
+      "disclaimerSummary": "About this estimate",
+      "disclaimerBody": "Indicative ranges based on weight-band rates. Chargeable weight = higher of actual weight or volumetric (loading metres × 1.75 t/m). For precise quote, WhatsApp us.",
+      "ctaLabel": "Send on WhatsApp →",
+      "resultHeader": "Typical range"
+    },
+    "whyConsolidate": {
+      "eyebrow": "Benefits",
+      "heading": "Why Consolidate?",
+      "sub": "4 reasons to share the truck.",
+      "reasons": [
+        {
+          "title": "Lower Cost",
+          "body": "Pay only for your tons. Split the truck cost with other shippers."
+        },
+        {
+          "title": "Faster Dispatch",
+          "body": "Truck already running your route — cargo moves sooner."
+        },
+        {
+          "title": "Full Traceability",
+          "body": "Your portion tracked individually with its own sub-manifest."
+        },
+        {
+          "title": "Backhaul Savings",
+          "body": "Return-truck pricing means lower rates for you."
+        }
+      ]
+    },
+    "corridors": {
+      "eyebrow": "Network",
+      "heading": "Where We Operate",
+      "sub": "From Durban to DDC — corridors that move SADC."
+    },
+    "trust": {
+      "eyebrow": "Compliance",
+      "heading": "Trusted Consolidation",
+      "sub": "Real transparency, not fake testimonials.",
+      "items": [
+        {
+          "title": "Insurance Compliant",
+          "body": "Same bonded carrier insurance as dedicated trucks. Fully covered."
+        },
+        {
+          "title": "GPS Tracking",
+          "body": "Track your portion via our <a href=\"/tracking.html\" style=\"color: var(--apex-orange);\">tracking page</a>."
+        },
+        {
+          "title": "Proof of Delivery",
+          "body": "POD certificates coming soon. Request from dispatch now."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Questions?",
+      "items": [
+        {
+          "question": "Minimum weight?",
+          "answer": "No minimum. Even half-ton pallets join existing runs."
+        },
+        {
+          "question": "How much longer?",
+          "answer": "Same or faster — truck already running your route."
+        },
+        {
+          "question": "What documents?",
+          "answer": "Addresses, cargo details, special handling. We handle the rest."
+        },
+        {
+          "question": "Can I track separately?",
+          "answer": "Yes — unique sub-manifest reference per shipper."
+        },
+        {
+          "question": "Exact delivery date?",
+          "answer": "We batch to meet deadlines. Dedicated truck available if needed."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Ready to Share<br><span>the Truck?</span>",
+      "sub": "Tell us your load. We'll match you to a running corridor — pay only for your tons.",
+      "ctaPrimary": { "label": "WhatsApp Us →", "href": "https://wa.me/27729377143" },
+      "ctaSecondary": { "label": "Try Estimate →", "href": "#calculator" }
+    }
+  },
+
   "seo": {
     "home": { "title": "Apex Transport – Cross Borders. No Excuses.", "description": "Cross‑border freight across 8 African countries. 24/7 tracking, customs clearance. Get a quote." },
     "services": { "title": "Freight Services – Apex Transport", "description": "Border docs, customs, routing, live tracking. We own the process." },
     "border": { "title": "Border Clearance – Apex Transport", "description": "Bonded carrier. Ground agents at major posts. We clear borders fast." },
     "fleet": { "title": "Fleet & Haulage – Apex Transport", "description": "GPS‑tracked fleet for African roads. Box trucks to bulk cargo." },
     "contact": { "title": "Contact & Quotes – Apex Transport", "description": "WhatsApp 072 937 7143. 24/7 dispatch, same-day quotes." },
-    "about": { "title": "About – Apex Transport", "description": "Pan‑African freight specialists. SA‑based, 8 countries, no excuses." }
+    "about": { "title": "About – Apex Transport", "description": "Pan‑African freight specialists. SA‑based, 8 countries, no excuses." },
+    "consolidation": { "title": "Consolidation Loads – Share the Truck – Apex Transport", "description": "Share a truck, pay for your tons. Consolidation freight across SADC. WhatsApp for a quote." }
   },
 
   "microcopy": {

@@ -593,6 +593,128 @@
     "footer": "Reliable Loads, Reliable Reach. — Apex Transport Group (Pty) Ltd | Operating 24/7"
   },
 
+  "consolidation": {
+    "hero": {
+      "eyebrow": "Consolidation Loads",
+      "headline": "One Truck.<br><span class=\"highlight\">Everyone's Cargo.</span>",
+      "subheadline": "Share space on a truck that is already running your route — pay only for the tons you send.",
+      "ctaPrimary": { "label": "Get an Instant Estimate →", "href": "#calculator" },
+      "ctaSecondary": { "label": "See How It Works →", "href": "#how-it-works" },
+      "image": "/avif/consolidation/mixed_cargo.avif",
+      "alt": "Truck loaded with mixed cargo at a depot terminal"
+    },
+    "howItWorks": {
+      "eyebrow": "The Process",
+      "heading": "How Consolidation Works",
+      "sub": "Three simple steps. One shared truck. Lower cost for everyone.",
+      "steps": [
+        {
+          "label": "Drop-Off",
+          "sub": "Small consignments arrive at the same depot and join a shared corridor run. We aggregate them into one consolidated load.",
+          "detail": "Your cargo doesn't need to be at the depot at the same moment — we batch consignments as they arrive and dispatch once the truck is full enough. You can drop freight today for a truck leaving tomorrow."
+        },
+        {
+          "label": "Consolidation",
+          "sub": "One manifest, one truck, one controlled load plan. Every shipper's portion is documented and tracked individually.",
+          "detail": "We maintain a single shipment file for the truck, but sub-manifest records for each shipper. You can see your portion, your cost, and your delivery confirmation — not the entire truck's manifest."
+        },
+        {
+          "label": "Departure & Corridor Run",
+          "sub": "The truck leaves on the same network and routes already covered by Apex — no new corridors, no extra risk.",
+          "detail": "Because the truck is already running your corridor, you get the same route reliability, border agents, and monitoring as a dedicated truck — at a fraction of the cost."
+        }
+      ]
+    },
+    "calculator": {
+      "eyebrow": "Estimate Your Cost",
+      "heading": "Instant Estimate",
+      "sub": "Move the sliders. The truck fills in real time. Price updates live.",
+      "disclaimerSummary": "About this estimate",
+      "disclaimerBody": "Prices are indicative ranges based on weight-band rates and route surcharges. The load gauge shows <strong>chargeable weight</strong> — whichever is higher of actual weight or volumetric-equivalent weight (loading metres × 1.75 t/m). Bulky low-density cargo gets priced by the space it occupies, not just its weight. For a precise quote, WhatsApp our dispatch team.",
+      "ctaLabel": "Send This Estimate on WhatsApp →",
+      "resultHeader": "Typical range for this load"
+    },
+    "whyConsolidate": {
+      "eyebrow": "Benefits",
+      "heading": "Why Consolidate?",
+      "sub": "Four reasons to share the truck, not a dedicated one.",
+      "reasons": [
+        {
+          "title": "Lower Cost Per Ton",
+          "body": "You pay only for the tons you send, not the full truck. Splitting a 34 t truck between three shippers means each pays their share — not the whole thing."
+        },
+        {
+          "title": "Faster Dispatch",
+          "body": "A truck that is already running your route can take your cargo sooner than waiting for a dedicated truck. Less waiting, same corridor."
+        },
+        {
+          "title": "Full Traceability",
+          "body": "Your portion is tracked individually — its own sub-manifest, its own delivery confirmation. You see your data, not the truck's entire load."
+        },
+        {
+          "title": "Backhaul-Powered Pricing",
+          "body": "A truck returning from a delivery carries your cargo back at a fraction of the forward cost. We price the backhaul — you get the savings."
+        }
+      ]
+    },
+    "corridors": {
+      "eyebrow": "Our Network",
+      "heading": "Where We Operate",
+      "sub": "From the Port of Durban to the DRC — we run the corridors that move SADC. Pick your cargo. See where it goes."
+    },
+    "trust": {
+      "eyebrow": "Proof & Compliance",
+      "heading": "Trusted Consolidation",
+      "sub": "Real transparency, not fake testimonials.",
+      "items": [
+        {
+          "title": "Insurance Compliant",
+          "body": "All consolidated loads carry the same bonded carrier insurance as dedicated trucks. Your cargo is covered whether it fills ten percent of the deck or ninety."
+        },
+        {
+          "title": "Tracker & Visibility",
+          "body": "GPS tracking per truck. Your portion of the load is visible in our tracking system — same as a dedicated shipment. Enter your reference on the <a href=\"/tracking.html\" style=\"color: var(--apex-orange);\">tracking page</a> to see where your cargo is."
+        },
+        {
+          "title": "Proof of Delivery (Coming Soon)",
+          "body": "We are building a system to give each shipper a timestamped, geotagged proof-of-delivery certificate for their portion. Until then, you can request your proof from our dispatch team."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Questions & Answers",
+      "heading": "Frequently Asked",
+      "items": [
+        {
+          "question": "What is the minimum weight you will consolidate?",
+          "answer": "We will consolidate any weight — no minimum. Even a half-ton pallet can join an existing run. The cost you pay is the weight you send, multiplied by the applicable rate band. If your consignment is tiny, you pay tiny."
+        },
+        {
+          "question": "How much longer does a consolidated load take versus a dedicated truck?",
+          "answer": "The truck is already running the route, so dispatch can happen in hours, not days. Transit time depends on the corridor and border complexity — typically the same or faster than a dedicated truck since we avoid waiting for a free vehicle. Consolidation adds no extra time to the journey; it adds efficiency to the pricing."
+        },
+        {
+          "question": "What documents do I need to provide per shipment?",
+          "answer": "Origin and destination addresses, cargo description (type, weight, dimensions), and any special handling requirements. We handle the rest — export permits, customs declarations, transit bonds, and border clearance paperwork. You do not need to be a freight document specialist."
+        },
+        {
+          "question": "Can I track my portion of the load separately?",
+          "answer": "Yes. Each shipper gets a unique sub-manifest reference. You can track your portion through our <a href=\"/tracking.html\">tracking system</a> and receive separate delivery confirmation. You see only your data — the truck's full manifest is internal."
+        },
+        {
+          "question": "What if my goods need to arrive on an exact date?",
+          "answer": "We can consolidate to delivery date — we batch consignments to meet your deadline. If a consolidated truck cannot guarantee your date, we offer a dedicated truck at the standard rate. You choose the trade-off between price and certainty."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Ready to Share<br><span>the Truck?</span>",
+      "sub": "Tell us your load details. We'll match you to a truck that's already running your corridor — you pay only for the tons you send.",
+      "ctaPrimary": { "label": "WhatsApp Us →", "href": "https://wa.me/27729377143" },
+      "ctaSecondary": { "label": "Try the Estimate →", "href": "#calculator" }
+    }
+  },
+
   "seo": {
     "home":   { "title": "Apex Transport Group – Move Cargo. Cross Borders. No Excuses.", "description": "Cross‑border freight specialists across 8 African countries. 24/7 monitoring, customs clearance, and direct WhatsApp support. Get a quote today." },
     "services":    { "title": "Full‑Chain Freight Services – Apex Transport Group", "description": "Border docs, customs clearance, route planning, transporter network, real‑time monitoring, direct communication. We own the entire process." },
@@ -600,7 +722,8 @@
     "fleet":       { "title": "Heavy Haulage Fleet – Box Trucks to Long‑Haul Specialists", "description": "GPS‑tracked fleet built for African roads. Cross‑border ready, bulk cargo, verified partners. 48h average dispatch." },
     "contact":     { "title": "Get a Quote – WhatsApp Same‑Day Response – Apex Transport", "description": "Call or WhatsApp 072 937 7143. Request a quote for your corridor load. South Africa‑based, 24/7 dispatch." },
     "about": { "title": "About Apex Transport Group – Proudly South African", "description": "Pan‑African cross‑border freight specialists. End‑to‑end logistics across Southern and Central Africa. Reg No: 2025/789240/07." },
-    "tracking":    { "title": "Track Your Load – Real‑Time Border Updates", "description": "Enter your load reference to see current location, border status, and ETA. Updating every hour." }
+    "tracking":    { "title": "Track Your Load – Real‑Time Border Updates", "description": "Enter your load reference to see current location, border status, and ETA. Updating every hour." },
+    "consolidation": { "title": "Consolidation Loads – Share the Truck, Split the Cost – Apex Transport Group", "description": "Share a truck running your route and pay only for the tons you send. Consolidation loads pricing with chargeable weight — space matters as much as mass." }
   },
 
   "microcopy": {
