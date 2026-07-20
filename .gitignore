@@ -1,0 +1,6 @@
+.kilo/
+node_modules/
+.venv/
+*.pyc
+.DS_Store
+Thumbs.db
