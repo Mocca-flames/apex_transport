@@ -94,6 +94,11 @@
   --bp-xl:  1280px;
   --bp-2xl: 1536px;
 
+  /* ── Load Gauge tokens ─────────────────────────────── */
+  --lg-weigh:     #F2B705;   /* Yellow — balanced density indicator */
+  --lg-tarp:      #E1672B;   /* Orange — heavy for footprint */
+  --lg-route:     #1E7F72;   /* Teal — bulky/light for footprint */
+
   /* ── Durations ─────────────────────────────────────── */
   --dur-fast:   0.15s;
   --dur-base:   0.25s;

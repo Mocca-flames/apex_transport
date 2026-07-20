@@ -17,6 +17,7 @@
     },
     "nav": {
       "links": [
+        { "label": "Consolidation", "href": "/consolidation-loads.html" },
         { "label": "Services", "href": "/services.html" },
         { "label": "Border Clearance", "href": "/border-clearance.html" },
         { "label": "Fleet", "href": "/fleet.html" },

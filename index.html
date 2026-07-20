@@ -37,7 +37,7 @@
       <div class="hero__media">
         <picture>
           <source media="(max-width: 1024px)" srcset="/avif/hero-mobile.avif" type="image/avif">
-          <img src="/avif/hero-desktop.avif" alt="" class="hero__img" data-parallax="0.2" fetchpriority="high"
+          <img src="/avif/hero-desktop.avif" alt="" class="hero__img" fetchpriority="high"
             data-content="home.hero.alt" data-content-attr="alt">
         </picture>
       </div>
@@ -118,6 +118,75 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Consolidation — story-driven section -->
+    <section class="section section--light" id="consolidation-summary" aria-labelledby="consolidation-summary-heading" style="padding-top: var(--space-20); padding-bottom: var(--space-16);">
+
+      <div class="container--narrow">
+        <header class="section-header">
+          <span class="section-header__eyebrow">Consolidation</span>
+          <h2 id="consolidation-summary-heading" class="section-header__title">One Truck, Everyone's Cargo.</h2>
+          <p class="section-header__sub">Instead of booking an entire truck, your cargo joins other shipments heading the same way. You pay only for the space and weight you use.</p>
+        </header>
+      </div>
+
+      <!-- Row 1: image left, text right -->
+      <div class="container" style="margin-top: var(--space-20);">
+        <div class="layout-feature" style="min-height: 480px;">
+          <div class="feature-split__media-consolidation">
+            <img src="/avif/consolidation/mixed_cargo.avif" alt="Mixed cargo consolidated onto one shared truck" class="feature-split__img" data-parallax="0.12" loading="lazy">
+          </div>
+          <div class="feature-split__content" style="padding: var(--space-16) var(--container-pad);">
+            <div>
+              <h3 class="consolidation-split__title">What is Consolidation?</h3>
+              <p class="consolidation-split__body">Your cargo joins other consignments heading the same direction. One truck, multiple shippers, split cost. You are not paying for the whole vehicle — just your portion of the deck.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: text left, image right -->
+      <div class="container" style="margin-top: var(--space-16);">
+        <div class="layout-feature layout-feature--reverse" style="min-height: 480px;">
+          <div class="feature-split__content" style="padding: var(--space-16) var(--container-pad);">
+            <div>
+              <h3 class="consolidation-split__title">How It Works</h3>
+              <p class="consolidation-split__body">Drop your freight at the depot. We match it to a truck already running your corridor. Your portion gets its own reference, its own tracking, and a delivery confirmation — the same as a dedicated load.</p>
+            </div>
+          </div>
+          <div class="feature-split__media-consolidation">
+            <img src="/avif/consolidation/en-route.avif" alt="Consolidated truck en route across a border corridor" class="feature-split__img" data-parallax="0.12" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: calculator left, image right -->
+      <div class="container" style="margin-top: var(--space-16);">
+        <div class="layout-feature layout-feature--reverse" style="min-height: 440px;">
+          <div class="feature-split__media-consolidation">
+            <img src="/avif/consolidation/checklist.avif" alt="Consolidation dispatch checklist and documentation" class="feature-split__img" data-parallax="0.12" loading="lazy">
+          </div>
+          <div class="feature-split__content" style="padding: var(--space-12) var(--container-pad);">
+            <div class="consolidation-mini-calc" data-consolidation-calculator data-route="local">
+              <span class="section-header__eyebrow">Quick Estimate</span>
+              <h3 class="consolidation-mini-calc__title">What would your load cost?</h3>
+              <div class="consolidation-mini-calc__row">
+                <label for="teaser-weight" class="consolidation-mini-calc__label">Weight (tons)</label>
+                <input type="range" id="teaser-weight" data-role="weight-input"
+                       min="0.5" max="34" step="0.5" value="0.5" class="consolidation-mini-calc__slider">
+                <span data-weight-output class="consolidation-mini-calc__value">0.5 t</span>
+              </div>
+              <div class="consolidation-mini-calc__result">
+                <span class="consolidation-mini-calc__result-label">Typical range for this load</span>
+                <span data-estimate-range class="consolidation-mini-calc__result-value">R 0 – R 0</span>
+              </div>
+              <a href="/consolidation-loads.html#calculator" class="consolidation-mini-calc__link">See full calculator with route options →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- Services (scroll-driven) -->
@@ -637,6 +706,9 @@
   <script src="/js/tracking.js" defer></script>
   <script src="/js/services.js?v=4" defer></script>
   <script src="/js/coverage.js?v=6" defer></script>
+  <script src="/js/weight-bands.js" type="module" defer></script>
+  <script src="/js/load-gauge.js" type="module" defer></script>
+  <script src="/js/consolidation.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script src="/js/counter.js" defer></script>
   <script src="/js/parallax.js" defer></script>

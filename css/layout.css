@@ -110,6 +110,77 @@
   /* Remove inline-gap whitespace */
 }
 
+.feature-split__media-consolidation {
+  position: relative;
+  overflow: hidden;
+  height: 80%;
+  /* stretch to match grid row height */
+  /* Fallback bg while image loads */
+  border-radius: 16px;
+  border: 1px solid var(--apex-stone);
+}
+
+/* Feature split image — parallax ready, cover-fill container */
+.feature-split__img-consolidation {
+  width: 80%;
+
+  /* Extra height to accommodate translate parallax without edges showing */
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+  display: block;
+  border-radius: 12px;
+  /* Remove inline-gap whitespace */
+}
+
+/* Consolidation images: rounded borders + reduced size, parallax-ready */
+.feature-split__media-consolidation {
+  width: 85%;
+  /* Center the smaller frame within the feature column */
+  margin-inline: auto;
+}
+
+.feature-split__media-consolidation .feature-split__img {
+  width: 100%;
+  /* Taller than the frame so the parallax translate never exposes edges */
+  height: 120%;
+  margin-top: -10%;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  will-change: transform;
+  transition: height 0.3s var(--ease-out);
+}
+
+/* Mobile: let the reduced frame fill the column with a stable aspect ratio */
+@media (max-width: 1024px) {
+  .feature-split__media-consolidation {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .feature-split__media-consolidation .feature-split__img {
+    height: 100%;
+    margin-top: 0;
+  }
+}
+
+/* Native-size video: render at source resolution (150×150), no upscaling,
+   centered in the frame. Source WebM is tiny, so stretching ruins quality. */
+.feature-split__video-native {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+}
+
 /* ── Editorial — full-bleed image with floating glass card ─── */
 .layout-editorial {
   position: relative;

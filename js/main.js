@@ -39,6 +39,9 @@
       if (typeof window.initCoverage === 'function') {
         window.initCoverage();
       }
+      if (typeof window.initCorridors === 'function') {
+        window.initCorridors();
+      }
     }).catch(function(err) {
       console.warn('[Main] Content load failed, services may be limited', err);
       if (typeof window.initServices === 'function') {

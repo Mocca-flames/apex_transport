@@ -635,7 +635,7 @@
   color: var(--apex-navy);
   line-height: 1;
   display: inline-block;
-   will-change: contents;
+  will-change: contents;
 }
 
 .trust-bar__label {
@@ -768,7 +768,6 @@
 .service-img {
   width: 48px;
   height: 48px;
-  height: 10%;
 }
 
 .service-card:hover {
@@ -1160,10 +1159,15 @@
   display: flex;
   justify-content: start;
   align-items: flex-start;
-  background-color: white;
+  
 }
 
 .section-header {
+  padding: var(--space-12) var(--container-pad) var(--space-8);
+ margin: 0;
+}
+
+.section-header-container {
   padding: var(--space-12) var(--container-pad) var(--space-8);
  margin: 0;
 
@@ -2350,5 +2354,1191 @@
 
   .process-timeline-track .timeline__sub {
     max-width: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ║ Load Gauge & Calculator Component (Consolidation)
+   ╚ Reusable — full-size on consolidation loads page,
+   ╚ mini-size in home page teaser.
+   ╚ Dependencies: tokens.css, base.css
+   ╚ HTML attribute api:
+   ║   data-consolidation-calculator      — mount point (root)
+   ║   data-role="weight-input"           — <input type=range> (tons)
+   ║   data-role="space-input"            — <input type=range> (space %, hidden/synthetic)
+   ║   data-loading-metres-input          — <input type=range> (LDM, full variant)
+   ║   data-loading-metres-output         — display element
+   ║   data-loading-metres-toggle          — <input type=checkbox> (bulky toggle)
+   ║   data-loading-metres-container       — wrapper shown/hidden by toggle
+   ║   data-border-tier-container         — border complexity pills (cross-border only)
+   ║   data-route / data-border-tier       — toggle buttons
+   ║   data-weight-output                  — display element
+   ║   data-chargeable-output / data-pricing-badge / data-multiplier-badge
+   ║   data-estimate-range                 — price range display
+   ║   data-volumetric-note                — volumetric pricing note
+   ║   data-whatsapp-cta                   — WhatsApp link (full variant)
+   ╚ ── Mini variant (teaser) ─────────────────────────────
+   ║   .fill-gauge--mini + .load-gauge--mini on the calculator root
+   ╚   Hides loading-metres + border tier, reduces font sizes, compact layout
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Calculator glass wrapper (shared) ──────────────────── */
+.calc-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  padding: var(--space-6) var(--space-6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+
+.calc-card--dark {
+  background: var(--glass-surface);
+  border-color: var(--glass-border);
+}
+
+/* ── Route toggle pills ─────────────────────────────────── */
+.calc-route-group {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding: var(--space-1);
+  background: rgba(13, 31, 60, 0.08);
+  border: 1px solid rgba(13, 31, 60, 0.18);
+  border-radius: 999px;
+}
+
+.calc-route-btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  flex: 1;
+  text-align: center;
+  color: var(--apex-navy);
+  background: transparent;
+  border: 2px solid transparent;
+  box-shadow: none;
+}
+
+.calc-route-btn:hover,
+.calc-route-btn:focus-visible {
+  background: rgba(13, 31, 60, 0.08);
+  border-color: rgba(13, 31, 60, 0.3);
+  color: var(--apex-navy);
+  transform: translateY(-1px);
+}
+
+.calc-route-btn.is-active {
+  background: var(--apex-navy);
+  color: var(--apex-white);
+  border-color: var(--apex-navy);
+  box-shadow: 0 10px 24px rgba(13, 31, 60, 0.2);
+}
+
+/* ── Input label ────────────────────────────────────────── */
+.calc-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: inherit;
+}
+
+.calc-label--dark {
+  color: var(--apex-white);
+}
+
+/* ── Slider row ─────────────────────────────────────────── */
+.calc-slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.calc-slider {
+  width: 100%;
+  accent-color: var(--apex-orange);
+}
+
+.calc-value {
+  min-width: 72px;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-lg);
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-value--dark {
+  color: var(--apex-white);
+}
+
+/* ── Gauge bar ──────────────────────────────────────────── */
+.calc-gauge-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.calc-gauge-track {
+  flex: 1;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.calc-gauge-fill {
+  height: 14px;
+  background: linear-gradient(90deg, var(--apex-orange), var(--apex-orange-hot));
+  transition: width 0.25s ease;
+  border-radius: 999px;
+}
+
+.calc-gauge-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-lg);
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.calc-gauge-label--dark {
+  color: var(--apex-white);
+}
+
+/* ── Estimate output ────────────────────────────────────── */
+.calc-estimate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.calc-estimate-label {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.8);
+  margin-bottom: var(--space-1);
+}
+
+.calc-estimate-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-base);
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-estimate-value--dark {
+  color: var(--apex-white);
+}
+
+/* ── Volumetric note ────────────────────────────────────── */
+.calc-volumetric-note {
+  font-size: var(--text-xs);
+  color: var(--apex-orange);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(194,65,12,0.12);
+  border-radius: 6px;
+  margin-top: var(--space-2);
+  display: none;
+}
+
+/* Top placement: spans both calculator columns, sits above the layout */
+.calc-volumetric-note--top {
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+  grid-column: 1 / -1;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Loading metres toggle (Bulky cargo?) ───────────────── */
+.calc-loading-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  font-size: var(--text-sm);
+  color: inherit;
+  cursor: pointer;
+}
+
+.calc-loading-toggle--dark {
+  color: rgba(255,255,255,0.85);
+}
+
+.calc-loading-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--apex-orange);
+}
+
+/* Loading metres container — shown/hidden by toggle */
+[data-loading-metres-container] {
+  display: none;
+}
+
+[data-loading-metres-container].is-visible {
+  display: block;
+}
+
+/* ── Benefit strip (teaser) ─────────────────────────────── */
+.calc-benefit-strip {
+  display: flex;
+  gap: var(--space-6);
+  overflow-x: auto;
+  padding-top: var(--space-6);
+  margin-top: var(--space-6);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  scrollbar-width: none;
+}
+
+.calc-benefit-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.calc-benefit-item {
+  min-width: 220px;
+  color: var(--apex-white);
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  padding: var(--space-3) var(--space-4);
+  white-space: nowrap;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Consolidation — split rows (home page) ────────────────── */
+.consolidation-split__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-3xl));
+  color: var(--apex-navy);
+  margin-bottom: var(--space-4);
+}
+
+.consolidation-split__body {
+  font-size: var(--text-lg);
+  color: var(--apex-charcoal);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* ── Mini calculator (inside feature-split content) ─────────── */
+.consolidation-mini-calc {
+  width: 100%;
+}
+
+.consolidation-mini-calc__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(var(--text-xl), 2.5vw, var(--text-2xl));
+  color: var(--apex-navy);
+  margin-bottom: var(--space-5);
+}
+
+.consolidation-mini-calc__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.consolidation-mini-calc__label {
+  font-size: var(--text-sm);
+  color: var(--apex-muted);
+  white-space: nowrap;
+}
+
+.consolidation-mini-calc__slider {
+  flex: 1;
+}
+
+.consolidation-mini-calc__value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: var(--text-xl);
+  color: var(--apex-navy);
+  min-width: 5ch;
+}
+
+.consolidation-mini-calc__result {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--apex-stone);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.consolidation-mini-calc__result-label {
+  font-size: var(--text-sm);
+  color: var(--apex-muted);
+}
+
+.consolidation-mini-calc__result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  color: var(--apex-navy);
+}
+
+.consolidation-mini-calc__link {
+  display: block;
+  margin-top: var(--space-5);
+  color: var(--apex-orange);
+  font-weight: 600;
+  font-size: var(--text-base);
+  text-decoration: none;
+}
+
+.consolidation-mini-calc__link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .consolidation-mini-calc__result {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ║ Load Gauge — SVG truck-and-trailer component
+   ╚ Reusable — full-size on consolidation loads page,
+   ╚ mini-size in home page teaser.
+   ╚ Dependencies: tokens.css (--lg-weigh, --lg-tarp, --lg-route)
+   ════════════════════════════════════════════════════════════════ */
+
+.load-gauge {
+  text-align: center;
+}
+
+.load-gauge__svg {
+  width: 100%;
+  display: block;
+}
+
+.load-gauge[data-variant="full"] .load-gauge__svg {
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.load-gauge[data-variant="mini"] .load-gauge__svg {
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.load-gauge__fill {
+  transition: height 0.3s ease, fill 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .load-gauge__fill {
+    transition: none;
+  }
+}
+
+/* ── Readout strip below the truck ───────────────────────── */
+.load-gauge__readout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.load-gauge__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.load-gauge__stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.6);
+}
+
+.load-gauge__stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--apex-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.load-gauge__badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.load-gauge__badge--weight {
+  background: rgba(242,183,5,0.2);
+  color: var(--lg-weigh);
+  border: 1px solid rgba(242,183,5,0.35);
+}
+
+.load-gauge__badge--space {
+  background: rgba(225,103,43,0.2);
+  color: var(--lg-tarp);
+  border: 1px solid rgba(225,103,43,0.35);
+}
+
+.load-gauge__multiplier {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.08);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+}
+
+/* ── Mini variant overrides ──────────────────────────────── */
+.load-gauge--mini .load-gauge__readout {
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.load-gauge--mini .load-gauge__stat-value {
+  font-size: var(--text-xl);
+}
+
+.load-gauge--mini .load-gauge__badge {
+  font-size: 0.65rem;
+  padding: 2px var(--space-2);
+}
+
+.load-gauge--mini .load-gauge__multiplier {
+  font-size: var(--text-xs);
+}
+
+/* ── SVG truck parts + controls (shared) ──────────────── */
+.load-gauge__cab {
+  fill: var(--apex-navy-mid);
+  stroke: var(--apex-stone);
+  stroke-width: 2;
+}
+
+.load-gauge__bed {
+  fill: rgba(255, 255, 255, 0.05);
+  stroke: var(--apex-stone);
+  stroke-width: 2;
+}
+
+.load-gauge__dividers line {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+}
+
+.load-gauge__wheel {
+  fill: var(--apex-charcoal);
+}
+
+.load-gauge__controls {
+  width: 100%;
+}
+
+.load-gauge__field {
+  margin-bottom: var(--space-4);
+}
+
+.load-gauge__field-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--apex-white);
+}
+
+.load-gauge__slider {
+  width: 100%;
+  accent-color: var(--apex-orange);
+}
+
+.load-gauge__value {
+  min-width: 72px;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-lg);
+  color: var(--apex-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.load-gauge__slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.load-gauge--mini .load-gauge__field-label {
+  font-size: var(--text-base);
+}
+
+.load-gauge--mini .load-gauge__value {
+  font-size: var(--text-base);
+  min-width: 56px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ║ Calculator Layout — two-column grid (desktop) / stacked (mobile)
+   ╚ Desktop: truck left (sticky), controls + output right
+   ╚ Mobile: truck on top, controls below (single column)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Mobile: single column ───────────────────────────────────── */
+.calc-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.calc-layout__truck {
+  display: flex;
+  justify-content: center;
+}
+
+.calc-layout__truck .load-gauge__svg {
+  max-width: 220px;
+}
+
+@media (max-width: 899px) {
+  .calc-layout__truck .load-gauge__svg {
+    transform: scaleX(-1);
+  }
+}
+
+.calc-layout__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Desktop: two-column grid ────────────────────────────────── */
+@media (min-width: 900px) {
+  .calc-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .calc-layout__truck {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-8));
+    padding: var(--space-8) 0;
+  }
+
+  .calc-layout__truck .load-gauge__svg {
+    max-width: 320px;
+  }
+
+  .calc-layout__panel {
+    gap: var(--space-8);
+    padding: var(--space-4) 0;
+  }
+}
+
+/* ── Panel sections ──────────────────────────────────────────── */
+.calc-panel__section {
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.calc-panel__section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.calc-panel__label {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #333;
+}
+
+.calc-panel__slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.calc-panel__slider {
+  width: 100%;
+  accent-color: var(--apex-orange);
+  height: 6px;
+}
+
+.calc-panel__value {
+  min-width: 80px;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-l);
+  font-weight: 600;
+  color: #333;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 900px) {
+  .calc-panel__label {
+    font-size: var(--text-l);
+  }
+
+  .calc-panel__value {
+    font-size: var(--text-xl);
+    min-width: 100px;
+  }
+}
+
+/* ── Result section ──────────────────────────────────────────── */
+.calc-panel__result {
+  background: var(--apex-navy);
+  border-radius: 16px;
+  padding: var(--space-6) var(--space-6);
+  text-align: center;
+}
+
+.calc-panel__result-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: var(--space-2);
+}
+
+.calc-panel__result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--apex-white);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-5);
+}
+
+.calc-panel__cta {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  .calc-panel__result {
+    padding: var(--space-8);
+  }
+
+  .calc-panel__result-header {
+    font-size: var(--text-base);
+  }
+
+  .calc-panel__result-value {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* ── Disclaimer ──────────────────────────────────────────────── */
+.calc-panel__disclaimer {
+  font-size: var(--text-xs);
+  color: var(--apex-muted);
+  line-height: 1.6;
+}
+
+.calc-panel__disclaimer summary {
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  color: var(--apex-muted);
+  font-size: var(--text-xs);
+}
+
+.calc-panel__disclaimer p {
+  margin-top: var(--space-2);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Corridors — Where We Operate (Consolidation Loads)
+   Mobile-first. Cards on mobile, table on desktop.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Filter bar ─────────────────────────────────────────────── */
+.corridor-filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+/* ── Frequency bar chart (per-route, Mon–Sun) ───────────────── */
+.freq-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: var(--space-1);
+}
+
+.freq-bars {
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.freq-bar {
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--apex-stone);
+  transition: background var(--dur-fast) var(--ease-out), height var(--dur-fast) var(--ease-out);
+}
+
+.freq-bar--on {
+  background: var(--apex-orange);
+}
+
+.freq-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.freq-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: var(--text-xs);
+  color: var(--apex-navy);
+  letter-spacing: 0.02em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Desktop: slightly taller bars */
+@media (min-width: 768px) {
+  .freq-bar {
+    height: 20px;
+  }
+}
+
+/* ── Chip row (scroll-snap on mobile) ───────────────────────── */
+.corridor-chips {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  padding: var(--space-1) 0;
+}
+
+.corridor-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.corridor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 100px;
+  border: 2px solid var(--apex-stone);
+  background: var(--apex-white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--apex-charcoal);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+  scroll-snap-align: start;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.corridor-chip:focus-visible {
+  outline: 2px solid var(--apex-orange);
+  outline-offset: 2px;
+}
+
+.corridor-chip.is-active {
+  border-color: var(--apex-orange);
+  background: var(--apex-orange-subtle);
+  color: var(--apex-navy);
+  box-shadow: 0 0 0 3px var(--apex-orange-subtle);
+}
+
+.corridor-chip__icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.corridor-chip__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Route count ────────────────────────────────────────────── */
+.corridor-count {
+  font-size: var(--text-sm);
+  color: var(--apex-muted);
+  margin: 0;
+  padding-left: var(--space-1);
+}
+
+/* ── Route list (cards — mobile default) ────────────────────── */
+.corridor-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.corridor-card {
+  background: var(--apex-white);
+  border: 1px solid var(--apex-stone);
+  border-radius: 12px;
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.corridor-card:hover {
+  box-shadow: 0 4px 16px rgba(13, 31, 60, 0.08);
+}
+
+/* Corridor label on cards */
+.corridor-card__corridor {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--apex-orange);
+  margin-bottom: var(--space-1);
+}
+
+/* Corridor badge (table) */
+.corridor-badge {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px var(--space-2);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.corridor-badge--1 {
+  background: var(--apex-orange-subtle);
+  color: var(--apex-orange);
+}
+
+.corridor-badge--2 {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--apex-success);
+}
+
+.corridor-badge--3 {
+  background: rgba(30, 127, 114, 0.1);
+  color: var(--lg-route);
+}
+
+.corridor-badge--4 {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--apex-muted);
+}
+
+/* Line 1: route */
+.corridor-card__route {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.corridor-card__origin,
+.corridor-card__dest {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--apex-navy);
+}
+
+.corridor-card__arrow {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  flex-shrink: 0;
+  color: var(--apex-orange);
+}
+
+.corridor-card__arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+.corridor-card__country {
+  font-size: var(--text-sm);
+  color: var(--apex-muted);
+  margin-left: var(--space-1);
+}
+
+/* Line 2: border post */
+.corridor-card__border {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--apex-charcoal);
+}
+
+.corridor-card__pin {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  flex-shrink: 0;
+  color: var(--apex-orange);
+}
+
+.corridor-card__pin svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Line 3: meta row */
+.corridor-card__meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--apex-stone);
+}
+
+.corridor-card__meta-label {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--apex-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+
+.corridor-card__meta-value {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--apex-navy);
+}
+
+/* Frequency meta item — allow chart to flow */
+.corridor-card__meta-item--freq {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Empty state ────────────────────────────────────────────── */
+.corridor-empty {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  font-size: var(--text-base);
+  color: var(--apex-muted);
+  margin: 0;
+}
+
+.corridor-empty a {
+  color: var(--apex-orange);
+  font-weight: 600;
+}
+
+/* ── Table (desktop, min-width: 768px) ──────────────────────── */
+@media (min-width: 768px) {
+  /* Chips switch to wrap — no more horizontal scroll */
+  .corridor-chips {
+    overflow-x: visible;
+    flex-wrap: wrap;
+    scroll-snap-type: none;
+  }
+
+  .corridor-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--apex-white);
+    border: 1px solid var(--apex-stone);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .corridor-table thead {
+    background: var(--apex-navy);
+  }
+
+  .corridor-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .corridor-table td {
+    font-size: var(--text-sm);
+    color: var(--apex-charcoal);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--apex-stone);
+    vertical-align: middle;
+  }
+
+  .corridor-table__corridor {
+    white-space: nowrap;
+  }
+
+  .corridor-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .corridor-table tbody tr {
+    transition: background var(--dur-fast) var(--ease-out);
+  }
+
+  .corridor-table tbody tr:hover {
+    background: var(--apex-orange-subtle);
+  }
+
+  /* Route column */
+  .corridor-table__route {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .corridor-table__origin,
+  .corridor-table__dest {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--apex-navy);
+  }
+
+  .corridor-table__arrow {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    flex-shrink: 0;
+    color: var(--apex-orange);
+  }
+
+  .corridor-table__arrow svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .corridor-table__country {
+    font-size: var(--text-xs);
+    color: var(--apex-muted);
+  }
+
+  /* Border post column */
+  .corridor-table__border {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .corridor-table__pin {
+    width: 14px;
+    height: 14px;
+    display: flex;
+    flex-shrink: 0;
+    color: var(--apex-orange);
+  }
+
+  .corridor-table__pin svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ETA & freq columns */
+  .corridor-table__eta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .corridor-table__freq {
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+
+  .corridor-table__freq .freq-bar {
+    height: 24px;
+    width: 5px;
+  }
+
+  .corridor-table__freq .freq-label {
+    font-size: var(--text-xs);
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .corridor-card,
+  .corridor-chip,
+  .corridor-table tbody tr,
+  .freq-bar {
+    transition: none;
   }
 }
