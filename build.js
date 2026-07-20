@@ -143,6 +143,8 @@ function bakeHtml(html) {
   html = html.replace(/\s*data-content(?:-html|-attr)?="[^"]*"/g, '');
   html = html.replace(/\s*data-swap-mobile(?:-html)?="[^"]*"/g, '');
 
+  html = html.replace(/<script>[\s\S]*?window\.__APEX_CONTENT__[\s\S]*?<\/script>/g, '');
+
   return html.replace(/<\/head>/i, [
     '<script>',
     'window.__APEX_CONTENT__ = ' + JSON.stringify(desktop) + ';',
