@@ -1,16 +1,14 @@
 /**
- * Content Loader — Dynamic text injection from JSON
- * Loads desktop (content.json) or mobile (content_mobile.json) based on viewport width
- * Provides global `window.apexContent` object with all content data
+ * Static content loader
+ * Uses the desktop content baked into the HTML at build time.
+ * On mobile, it swaps in the mobile override text via data-swap-mobile attributes.
  */
 (function() {
   'use strict';
 
-  const CONTENT_DESKTOP = '/data/content.json';
-  const CONTENT_MOBILE = '/data/content_mobile.json';
   const MOBILE_BREAKPOINT = 1024; // px — matches CSS/services.js breakpoint
 
-  let apexContent = null;
+  let apexContent = window.__APEX_CONTENT__ || null;
   var contentPromise;
 
   /**
@@ -21,46 +19,18 @@
   }
 
   /**
-   * Fetch appropriate content file based on viewport
+   * Apply mobile override attributes when the page is in mobile mode.
    */
-  function fetchContent() {
-    const url = isMobile() ? CONTENT_MOBILE : CONTENT_DESKTOP;
-    console.log('[content] fetchContent starting', { url: url, isMobile: isMobile() });
+  function swapMobileOverrides() {
+    if (!isMobile()) return;
 
-    return fetch(url, { credentials: 'same-origin' })
-      .then(function(response) {
-        console.log('[content] fetch response', { ok: response.ok, status: response.status, url: response.url });
-        if (!response.ok) {
-          throw new Error('Content fetch failed: ' + response.status);
-        }
-        return response.json();
-      })
-      .then(function(data) {
-        console.log('[content] fetchContent loaded', { hasData: !!data, keys: data ? Object.keys(data).join(', ') : 'none' });
-        apexContent = data;
-        return data;
-      })
-      .catch(function(err) {
-        console.error('[Apex Content]', err);
-        // If we attempted mobile and failed, try desktop fallback
-        if (isMobile()) {
-          return fetch(CONTENT_DESKTOP, { credentials: 'same-origin' })
-            .then(function(resp) {
-              if (!resp.ok) throw new Error('Desktop fallback failed');
-              return resp.json();
-            })
-            .then(function(data) {
-              apexContent = data;
-              return data;
-            })
-            .catch(function(e) {
-              console.error('[Apex Content] Fallback also failed', e);
-              return null;
-            });
-        }
-        // Already desktop and failed
-        return null;
-      });
+    document.querySelectorAll('[data-swap-mobile]').forEach(function(el) {
+      el.textContent = el.getAttribute('data-swap-mobile');
+    });
+
+    document.querySelectorAll('[data-swap-mobile-html]').forEach(function(el) {
+      el.innerHTML = el.getAttribute('data-swap-mobile-html');
+    });
   }
 
   /**
@@ -600,6 +570,7 @@
 
 
   function buildAll() {
+    swapMobileOverrides();
     buildNav();
     buildTicker();
     buildServicesPanels();
@@ -679,7 +650,9 @@
     get: get,
     inject: inject,
     batch: batch,
-    refresh: buildAll
+    refresh: buildAll,
+    isMobile: isMobile,
+    swapMobileOverrides: swapMobileOverrides
   };
 
   // After shared-nav.js injects the nav HTML fragment, re-run
@@ -700,9 +673,10 @@
     if (_contentLoaded) buildAll();
   });
 
-  // Start loading content immediately
-  var contentPromise = fetchContent().then(function(data) {
-    console.log('[content] fetchContent promise resolved', {
+  // Static page content is already baked into the HTML. We only need the desktop
+  // data object for any dynamic builders that still render HTML at runtime.
+  var contentPromise = Promise.resolve(apexContent).then(function(data) {
+    console.log('[content] static content ready', {
       dataLoaded: !!data,
       dataKeys: data ? Object.keys(data).join(', ') : 'none',
       apexContentNow: !!apexContent
@@ -713,7 +687,7 @@
       buildAll();
       _built = true;
     } else {
-      console.warn('[Apex Content] No content data loaded; dynamic content will be missing');
+      console.warn('[Apex Content] No content data available; dynamic content may be missing');
     }
     if (_navInjectedDone && !_built) buildAll();
   });

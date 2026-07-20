@@ -59,65 +59,65 @@
 
   "home": {
     "hero": {
-      "eyebrow": "Cross-Border Freight Specialists",
-      "headline": "Move Cargo.<br><span class=\"highlight\">Cross Borders.</span><br>No Excuses.",
-      "subheadline": "Apex Transport Group manages end‑to‑end freight logistics across Southern and Central Africa — from finding the right truck to clearing customs at the border.",
-      "ctaPrimary": { "label": "WhatsApp Us →", "href": "https://wa.me/27729377143" },
-      "ctaSecondary": { "label": "Our Services →", "href": "/services.html" },
+      "eyebrow": "SADC Corridor Specialists",
+      "headline": "Cargo that moves.<br><span class=\"highlight\">Borders that clear.</span><br>No excuses.",
+      "subheadline": "Stop getting stuck at the gate. From Johannesburg to the Copperbelt, Apex manages the full chain: customs, bonded transit, and 24/7 road-monitoring. We don't just quote—we deliver.",
+      "ctaPrimary": { "label": "WhatsApp Dispatcher →", "href": "https://wa.me/27729377143" },
+      "ctaSecondary": { "label": "Our Corridors →", "href": "/services.html" },
       "image": "webp/img_5.webp",
       "alt": "Freight truck crossing border, golden hour, dust trail.",
       "stats": [
-        { "value": "8", "label": "Countries", "sub": "Southern & Central Africa" },
-        { "value": "24/7", "label": "Monitoring", "sub": "Dispatch team always on" },
-        { "value": "6h", "label": "Clearance", "sub": "Fast border processing" }
+        { "value": "8", "label": "Countries", "sub": "The full SADC network" },
+        { "value": "24/7", "label": "Monitoring", "sub": "Dispatchers on call" },
+        { "value": "6h", "label": "Clearance", "sub": "Pushing past border jams" }
       ]
     },
     "servicesSection": {
-      "label": "What We Do",
-      "heading": "Our Services",
-      "intro": "From documentation to delivery, Apex manages every step of your cross-border freight with precision and care.",
+      "label": "Our Field Ops",
+      "heading": "Corridor-Ready Logistics",
+      "intro": "We don't work from behind a screen; we work from the border post. We know the North-South Corridor like the back of our hands.",
       "services": {
         "border-docs": {
           "id": "border-docs",
           "label": "01",
-          "title": "Border Documentation",
-          "description": "Fast, accurate preparation of all cross-border paperwork. We know the requirements for all 8 Southern & Central African countries — no delays at the gate.",
-          "keyBenefit": "8 countries, one standard."
+          "title": "Border-Ready Paperwork",
+          "description": "Don't let a missing stamp stop your truck. We handle ZIMRA, ZRA, and SARS documentation before your wheels even hit the gate.",
+          "keyBenefit": "No 'missing docs' dramas at the border."
         },
         "customs-clearance": {
           "id": "customs-clearance",
           "label": "02",
-          "title": "Customs Clearance",
-          "description": "We navigate customs processes with precision. Our team handles declarations, duties, and compliance so your load never sits at a border unnecessarily.",
-          "keyBenefit": "On-ground agents at every major border."
+          "title": "Boots-on-the-Ground Customs",
+          "description": "We don't just file papers; our agents are at the gate in Beit Bridge, Chirundu, and Kasumbalesa to push your load through the queue.",
+          "keyBenefit": "Agents at the gate, not just the office."
         },
         "route-planning": {
           "id": "route-planning",
           "label": "03",
-          "title": "Route Planning",
-          "description": "Strategic routing that balances speed, cost, and compliance. We factor in road conditions, border wait times, and cargo requirements before a wheel turns.",
-          "keyBenefit": "Real-time adjustments for weather, strikes, or wait times."
+          "title": "Corridor Strategy",
+          "description": "We monitor strikes, road closures, and border congestion. We re-route in real-time so your load doesn't sit idle for days.",
+          "keyBenefit": "Beating the border traffic."
         },
         "transporter-network": {
           "id": "transporter-network",
           "label": "04",
-          "title": "Transporter Network",
-          "description": "Your cargo, matched to the right truck. We maintain a strong network of verified transporters across the region, so we always have capacity when you need it.",
-          "keyBenefit": "Verified partners, no rogue trucks."
+          "title": "Vetted Fleet Network",
+          "description": "No 'rogue' operators. We only use verified, SADC-compliant transporters who know how to handle high-value or bulk commodities.",
+          "keyBenefit": "Trusted, safe, and reliable."
         },
         "real-time-monitoring": {
           "id": "real-time-monitoring",
           "label": "05",
-          "title": "Real-Time Monitoring",
-          "description": "Hands-on oversight from pickup to delivery. We track every shipment in real-time and proactively handle exceptions before they become problems.",
-          "keyBenefit": "Proactive exception handling."
+          "title": "Live Status Updates",
+          "description": "Get direct WhatsApp updates. We track your load via GPS and keep you informed of every checkpoint along the way.",
+          "keyBenefit": "Total visibility from A to Z."
         },
         "direct-communication": {
           "id": "direct-communication",
           "label": "06",
-          "title": "Direct Communication",
-          "description": "Call or WhatsApp us any time. We are South Africa-based and fully reachable — not an automated system, real people who know your load.",
-          "keyBenefit": "24/7 WhatsApp & phone — real people."
+          "title": "Real People, Real Talk",
+          "description": "No call centers, no ticket systems. You're talking directly to our South Africa-based dispatch team. If there's a problem, we fix it fast.",
+          "keyBenefit": "24/7 WhatsApp access."
         }
       }
     },
