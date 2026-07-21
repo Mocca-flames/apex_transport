@@ -37,6 +37,7 @@
 
   var TOTAL_ROUTES = routes.length;
   var activeCommodity = 'mining';
+  var cardsExpanded = false;
 
   var corridorNames = {
     1: 'North-South Corridor',
@@ -45,6 +46,7 @@
     4: 'Cross-Border'
   };
 
+  var WHATSAPP_NUMBER = '27729377143';
   var FLAG_CDN = 'https://flagcdn.com/w80/';
   var countryCodes = {
     'South Africa': 'za',
@@ -177,18 +179,29 @@
   /* ── Render cards (mobile) ─────────────────────────────────── */
   function renderCards(visible) {
     if (visible.length === 0) {
-      listEl.innerHTML = '<p class="corridor-empty">No direct consolidation route for this commodity yet — <a href="https://wa.me/27729377143">ask us about a custom quote</a>.</p>';
+      listEl.innerHTML = '<p class="corridor-empty">No direct consolidation route for this commodity yet — <a href="https://wa.me/' + WHATSAPP_NUMBER + '">ask us about a custom quote</a>.</p>';
       return;
     }
+    var truncate = !isDesktop && !cardsExpanded && visible.length > 3;
+    var slice = truncate ? visible.slice(0, 3) : visible;
     var html = '';
-    visible.forEach(function (r) {
-      html += '<article class="corridor-card">'
+    slice.forEach(function (r, i) {
+      var whatsappMsg = encodeURIComponent('Hi, I need a consolidation quote for ' + r.origin + ' → ' + r.destination + ' (' + r.country + ')');
+      html += '<article class="corridor-card" tabindex="-1"'
+        + (i === 3 ? ' id="corridor-card-first-hidden"' : '')
+        + '>'
         + '<div class="corridor-card__corridor">' + corridorNames[r.priority] + '</div>'
+        + '<div class="corridor-card__header">'
         + '<div class="corridor-card__route">'
         + '<span class="corridor-card__origin">' + r.origin + '</span>'
         + '<span class="corridor-card__arrow">' + icons.arrow + '</span>'
         + '<span class="corridor-card__dest">' + r.destination + '</span>'
         + '<span class="corridor-card__country">' + r.country + '</span>'
+        + '</div>'
+        + '<a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + whatsappMsg + '" class="price-link corridor-card__price" target="_blank" rel="noopener">'
+        + '<span class="price-link__value">' + r.price + '</span>'
+        + '<span class="price-link__cta">Get Quote →</span>'
+        + '</a>'
         + '</div>'
         + '<div class="corridor-card__border">'
         + '<span class="corridor-card__pin">' + icons.mapPin + '</span>'
@@ -206,13 +219,17 @@
         + '</div>'
         + '</article>';
     });
+    if (truncate) {
+      html += '<button class="corridor-show-more" type="button" aria-expanded="false">'
+        + 'Show ' + (visible.length - 3) + ' more routes</button>';
+    }
     listEl.innerHTML = html;
   }
 
   /* ── Render table (desktop) ────────────────────────────────── */
   function renderTable(visible) {
     if (visible.length === 0) {
-      listEl.innerHTML = '<p class="corridor-empty">No direct consolidation route for this commodity yet — <a href="https://wa.me/27729377143">ask us about a custom quote</a>.</p>';
+      listEl.innerHTML = '<p class="corridor-empty">No direct consolidation route for this commodity yet — <a href="https://wa.me/' + WHATSAPP_NUMBER + '">ask us about a custom quote</a>.</p>';
       return;
     }
     var html = '<table class="corridor-table">'
@@ -239,7 +256,7 @@
         + '<td class="corridor-table__eta">' + r.eta + '</td>'
         + '<td class="corridor-table__freq">' + r.frequency + '</td>'
         + '<td class="corridor-table__price">'
-        + '<a href="https://wa.me/27729377143?text=' + whatsappMsg + '" class="price-link" target="_blank" rel="noopener">'
+        + '<a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + whatsappMsg + '" class="price-link" target="_blank" rel="noopener">'
         + '<span class="price-link__value">' + r.price + '</span>'
         + '<span class="price-link__cta">Get Quote →</span>'
         + '</a>'
@@ -267,7 +284,17 @@
     var chip = e.target.closest('.corridor-chip');
     if (!chip) return;
     activeCommodity = chip.getAttribute('data-commodity');
+    cardsExpanded = false;
     render();
+  }
+
+  function onShowMoreClick(e) {
+    var btn = e.target.closest('.corridor-show-more');
+    if (!btn) return;
+    cardsExpanded = true;
+    render();
+    var target = document.getElementById('corridor-card-first-hidden');
+    if (target) target.focus();
   }
 
   /* ── Init ──────────────────────────────────────────────────── */
@@ -282,6 +309,7 @@
     if (!chipsEl || !countEl || !listEl) return;
 
     chipsEl.addEventListener('click', onChipClick);
+    listEl.addEventListener('click', onShowMoreClick);
     window.addEventListener('resize', debounce(checkViewport, 150));
 
     checkViewport();

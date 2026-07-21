@@ -16,6 +16,8 @@
     var dotsWrap = document.getElementById('js-progress-dots');
     var lenis    = window.getLenis ? window.getLenis() : null;
 
+    if (!track) return;
+
     if (window.matchMedia('(max-width: 1024px)').matches) {
       track.classList.add('services--static');
 
